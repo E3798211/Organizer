@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <ctype.h>
+#include <cctype>
 #include <cstdlib>
 #include "Funcs.h"
 
@@ -12,10 +12,10 @@ std::string UserEnter()
 
     do{
         if(status == 1)
-            std::cout << "\nEmpty message.";    //Print message if input is incorrect
+            std::cout << "Empty message.\n";    //Print message if input is incorrect
 
         status = 0;                             //Ask for new message
-        std::cout << "\n\n -> ";
+        std::cout << "# ";
         getline(std::cin, input);
 
         if(input.empty())                       //if input is incorrect change it's status
@@ -33,18 +33,18 @@ void PasswordCheck()
 
     std::fstream memory("memo.txt");            //Opening memory to get password
     if(!memory.is_open()){
-        std::cout << "\nmemo.txt not found.";
+        std::cout << "memo.txt not found.\n";
         exit(1);
     }
 
     getline(memory, password);
-    std::cout << "\nEnter password.";
+    std::cout << "Enter password.\n";
 
     while(1){                                   //User will not leave the loop
         input = UserEnter();                    //until password is incorrect
         if(input == password)
             break;
-        std::cout << "\nIncorrect password.";
+        std::cout << "Incorrect password.\n";
     }
 }
 
@@ -70,5 +70,42 @@ std::string* StrToWord(std::string str)
     return words;
 }
 
+void AddData()
+{
+    std::ofstream data("data.txt", std::ios_base::app);         //Open to write to the end
+    std::string message;                                        //User's message
+    int priority;                                               //Message's priority
+    //priority - status - text
+
+    std::cout << "Your message:\n";
+    message = UserEnter();
+
+    std::cout << "Priority:\n";
+    priority = DigitEnter();
+
+    data << priority << " " << "0" << " " << message << "\n";   //Writing to the file
+}
+
+int DigitEnter()
+{
+    char input[100];                //User's input
+    int value;
+    bool correct = true;
+
+    do{
+        if(!correct)
+            std::cout << "Incorrect enter.\n";
+
+        std::cout << "# ";
+        std::cin >> input;          //Entering number
+        value = std::atoi(input);   //Converting to int
+        correct = true;
+
+        if(value <= 0 || value >= 10)
+            correct = false;
+    }while(!correct);
+
+    return value;                   //Returning value
+}
 
 
