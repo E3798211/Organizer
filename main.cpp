@@ -7,5 +7,7 @@ int main()
 {
     string a;
     a = UserEnter();
+    PasswordCheck();
     cout << a;
 }
+
