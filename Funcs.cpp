@@ -18,7 +18,7 @@ std::string UserEnter()
         std::cout << "\n\n -> ";
         getline(std::cin, input);
 
-        if(input.empty() || isspace(input[0]))  //if input is incorrect change it's status
+        if(input.empty())                       //if input is incorrect change it's status
             status = 1;
 
     }while(status != 0);                        //while input is incorrect
@@ -47,3 +47,28 @@ void PasswordCheck()
         std::cout << "\nIncorrect password.";
     }
 }
+
+std::string* StrToWord(std::string str)
+{
+    std::string* words = new std::string [20];
+    int word_num = 0;                               //Word's number
+    bool prev_is_space = true;                      //Shows if previous symbol was space
+
+    std::string::iterator iter = str.begin();
+
+    while(iter != str.end()){
+        if(!isspace(*iter)){                        //if value is not space
+            words[word_num].append(1, *iter);       //put it into the word
+            prev_is_space = false;
+        }else{                                      //else go to new word
+            if(!prev_is_space)
+                word_num++;
+            prev_is_space = true;
+        }
+        iter++;
+    }
+    return words;
+}
+
+
+
