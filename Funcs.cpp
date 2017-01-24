@@ -146,3 +146,58 @@ void DeleteData(int pos)
     std::remove("tmp.txt");                 //Deleting file
 }
 
+void ChangeStatus(int pos)
+{
+    std::ifstream idata("data.txt");
+    std::ofstream otmp("tmp.txt");           //creating tmp.txt
+    std::string line_to_change;
+    std::string tmp_str;
+    int line_amount = 0;
+
+    while(!idata.eof()){                    //finding the line to change
+        std::getline(idata, tmp_str);       //and rewriting everything to tmp.txt
+        if(tmp_str.empty()) break;
+
+        otmp << tmp_str << "\n";
+
+        if(line_amount == pos)
+            line_to_change = tmp_str;
+        line_amount++;
+    }
+
+    if(line_amount > pos){              //if such line exists
+        idata.close();                                          //opening stream to data,
+        std::ofstream odata("data.txt", std::ios_base::trunc);  //deleting everything
+        otmp.close();
+        std::ifstream itmp("tmp.txt");
+
+        std::string::iterator iter = line_to_change.begin();
+        while(!isspace(*iter))
+            iter++;
+        iter++;                         //now iter looks on 'status'
+
+        if(*iter == '0') *iter = '1';   //changing the value
+        else *iter = '0';
+
+        int counter = 0;
+        while(!itmp.eof()){
+            std::getline(itmp, tmp_str);
+            if(tmp_str.empty()) break;
+
+            if(counter == pos)  odata << line_to_change << "\n";
+            else                odata << tmp_str << "\n";
+
+            counter++;
+        }
+        odata.close();
+        itmp.close();
+        std::remove("tmp.txt");
+    }else
+        std::cout << "No such message.\n";
+}
+
+
+
+
+
+

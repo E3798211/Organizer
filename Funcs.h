@@ -7,6 +7,7 @@ std::string UserEnter();                    //User's enter
 void PasswordCheck();                       //Password check
 void AddData();                             //Add data
 void DeleteData(int pos);                   //Delete data
+void ChangeStatus(int pos);                 //Change status
 
 //Service funcs
 

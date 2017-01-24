@@ -19,5 +19,6 @@ int main()
 
     //AddData();
     //DeleteData(3);
+    ChangeStatus(0);ChangeStatus(2);ChangeStatus(4);
 }
 
