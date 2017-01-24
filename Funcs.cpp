@@ -81,12 +81,12 @@ void AddData()
     message = UserEnter();
 
     std::cout << "Priority:\n";
-    priority = DigitEnter();
+    priority = DigitEnter(0, 10);
 
     data << priority << " " << "0" << " " << message << "\n";   //Writing to the file
 }
 
-int DigitEnter()
+int DigitEnter(int _min, int _max)
 {
     char input[100];                //User's input
     int value;
@@ -101,11 +101,13 @@ int DigitEnter()
         value = std::atoi(input);   //Converting to int
         correct = true;
 
-        if(value <= 0 || value >= 10)
+        if(value <= _min || value >= _max)
             correct = false;
     }while(!correct);
 
     return value;                   //Returning value
 }
+
+
 
 
