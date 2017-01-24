@@ -4,7 +4,6 @@
 #include <cctype>
 #include <cstdlib>
 #include "Funcs.h"
-//#include "stdfix.h"
 
 std::string UserEnter()
 {
@@ -51,7 +50,7 @@ void PasswordCheck()
 
 std::string* StrToWord(std::string str)
 {
-    std::string* words = new std::string [20];
+    std::string* words = new std::string [255];
     int word_num = 0;                               //Word's number
     bool prev_is_space = true;                      //Shows if previous symbol was space
 
@@ -144,6 +143,9 @@ void DeleteData(int pos)
     data_new.close();
 
     std::remove("tmp.txt");                 //Deleting file
+
+    if(counter < pos)                       //if
+        std::cout << "No such message.\n";  //Nothing changes
 }
 
 void ChangeStatus(int pos)
@@ -196,8 +198,8 @@ void ChangeStatus(int pos)
         std::cout << "No such message.\n";
 }
 
-
-
-
-
+void ChangePriority(int pos, int pri)
+{
+    //FIXME
+}
 

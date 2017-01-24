@@ -11,7 +11,7 @@ void ChangeStatus(int pos);                 //Change status
 
 //Service funcs
 
-std::string* StrToWord(std::string str);    //String to 'words'
+std::string* StrToWord(std::string str);    //String to 'words'. Max amount of 'words' = 255
 int DigitEnter(int _min, int _max);         //Protected enter
 
 #endif // FUNCS_H_INCLUDED
