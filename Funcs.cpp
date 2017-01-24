@@ -4,7 +4,6 @@
 #include <cctype>
 #include <cstdlib>
 #include "Funcs.h"
-//#include "stdfix.h"
 
 std::string UserEnter()
 {
@@ -51,7 +50,7 @@ void PasswordCheck()
 
 std::string* StrToWord(std::string str)
 {
-    std::string* words = new std::string [20];
+    std::string* words = new std::string [255];
     int word_num = 0;                               //Word's number
     bool prev_is_space = true;                      //Shows if previous symbol was space
 
@@ -144,5 +143,51 @@ void DeleteData(int pos)
     data_new.close();
 
     std::remove("tmp.txt");                 //Deleting file
+
+    if(counter < pos)                       //if
+        std::cout << "No such message.\n";  //Nothing changes
 }
+
+void ChangeStatus(int pos)
+{
+    std::fstream data("data.txt");          //creating stream
+    std::string lines[255];                 //array to save lines from data.txt
+    std::string tmp;
+    int lines_amount = 0;
+
+    while(!data.eof()){                     //coping all messages
+        std::getline(data, lines[lines_amount]);
+        if(lines[lines_amount].empty())
+            break;
+        lines_amount++;
+    }
+
+    if(lines_amount > pos){                     //if such message exist
+        std::string::iterator iter = lines[pos].begin();
+
+        while(!isspace(*iter))
+            iter++;                         //iter is before 'status'
+        iter++;                             //iter is on 'status'
+
+        if(*iter == '0')                    //change 'status'
+            *iter = '1';
+        else *iter = '0';
+
+        data.close();                       //close stream and create another with deleting all
+        std::ofstream data_new("data.txt", std::ios_base::trunc);
+
+        for(int i = 0; i < lines_amount; i++)    //returning all back
+            data_new << lines[i] << "\n";
+
+        data_new.close();                   //closing stream
+    }else                                   //else tell about mistake
+        std::cout << "No such message.\n";
+}
+
+void ChangePriority(int pos, int pri)
+{
+    //FIXME
+}
+
+
 

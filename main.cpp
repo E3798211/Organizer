@@ -10,14 +10,15 @@ int main()
     string* b = new string [100];
     //a = UserEnter();
     //b = StrToWord(UserEnter());
-    //cout << b[0] << endl;
-    //cout << b[1] << endl;
-    //cout << b[2] << endl;
-    //cout << b[3] << endl;
     //PasswordCheck();
     //cout << a;
 
     //AddData();
-    //DeleteData(3);
+    //DeleteData(10);
+    //AddData();
+    //ChangeStatus(0);
+
+    //256 notes - max
+    //Do no forget to free pointer with 'words'
 }
 
