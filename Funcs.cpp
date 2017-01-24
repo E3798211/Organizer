@@ -198,6 +198,47 @@ void ChangeStatus(int pos)
 
 void ChangePriority(int pos, int pri)
 {
-    //FIXME
+    std::ifstream idata("data.txt");
+    std::ofstream otmp("tmp.txt");          //creating tmp.txt
+    std::string line_to_change;
+    std::string tmp_str;
+    int line_amount = 0;
+
+    while(!idata.eof()){                    //finding the line to change
+        std::getline(idata, tmp_str);       //and rewriting everything to tmp.txt
+        if(tmp_str.empty()) break;
+
+        otmp << tmp_str << "\n";
+
+        if(line_amount == pos)              //remembering the line_to_change
+            line_to_change = tmp_str;
+        line_amount++;
+    }
+
+    if(line_amount > pos){                  //if such line exists
+        idata.close();                                          //opening stream to data,
+        std::ofstream odata("data.txt", std::ios_base::trunc);  //deleting everything
+        otmp.close();
+        std::ifstream itmp("tmp.txt");
+
+        std::string str = line_to_change.substr(1, std::string::npos);
+
+        int counter = 0;
+
+        while(!itmp.eof()){                 //returning everything back
+            std::getline(itmp, tmp_str);
+            if(tmp_str.empty()) break;
+
+            if(counter == pos)  odata << pri << str << "\n";
+            else                odata << tmp_str << "\n";
+
+            counter++;
+        }
+
+        odata.close();                      //close streams and deleting tmp.txt
+        itmp.close();
+        std::remove("tmp.txt");
+    }else
+        std::cout << "No such message.\n";
 }
 
