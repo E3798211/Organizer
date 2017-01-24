@@ -7,14 +7,14 @@
 
 std::string UserEnter()
 {
-    std::string input;          //User's input
-    int status = 0;             //If input is correct
+    std::string input;          //user's input
+    int status = 0;             //if input is correct
 
     do{
         if(status == 1)
-            std::cout << "Empty message.\n";    //Print message if input is incorrect
+            std::cout << "Empty message.\n";    //print message if input is incorrect
 
-        status = 0;                             //Ask for new message
+        status = 0;                             //ask for new message
         std::cout << "# ";
         getline(std::cin, input);
 
@@ -28,10 +28,10 @@ std::string UserEnter()
 
 void PasswordCheck()
 {
-    std::string password;                       //Password
-    std::string input;                          //User's input
+    std::string password;                       //password
+    std::string input;                          //user's input
 
-    std::fstream memory("memo.txt");            //Opening memory to get password
+    std::fstream memory("memo.txt");            //opening memory to get password
     if(!memory.is_open()){
         std::cout << "memo.txt not found.\n";
         exit(1);
@@ -40,7 +40,7 @@ void PasswordCheck()
     getline(memory, password);
     std::cout << "Enter password.\n";
 
-    while(1){                                   //User will not leave the loop
+    while(1){                                   //user will not leave the loop
         input = UserEnter();                    //until password is incorrect
         if(input == password)
             break;
@@ -51,8 +51,8 @@ void PasswordCheck()
 std::string* StrToWord(std::string str)
 {
     std::string* words = new std::string [255];
-    int word_num = 0;                               //Word's number
-    bool prev_is_space = true;                      //Shows if previous symbol was space
+    int word_num = 0;                               //word's number
+    bool prev_is_space = true;                      //shows if previous symbol was space
 
     std::string::iterator iter = str.begin();
 
@@ -72,9 +72,9 @@ std::string* StrToWord(std::string str)
 
 void AddData()
 {
-    std::ofstream data("data.txt", std::ios_base::app);         //Open to write to the end
-    std::string message;                                        //User's message
-    int priority;                                               //Message's priority
+    std::ofstream data("data.txt", std::ios_base::app);         //open to write to the end
+    std::string message;                                        //user's message
+    int priority;                                               //message's priority
     //priority - status - text
 
     std::cout << "Your message:\n";
@@ -83,12 +83,12 @@ void AddData()
     std::cout << "Priority:\n";
     priority = DigitEnter(0, 10);
 
-    data << priority << " " << "0" << " " << message << "\n";   //Writing to the file
+    data << priority << " " << "0" << " " << message << "\n";   //writing to the file
 }
 
 int DigitEnter(int _min, int _max)
 {
-    char input[100];                //User's input
+    char input[100];                //user's input
     int value;
     bool correct = true;
 
@@ -97,61 +97,58 @@ int DigitEnter(int _min, int _max)
             std::cout << "Incorrect enter.\n";
 
         std::cout << "# ";
-        std::cin >> input;          //Entering number
-        value = std::atoi(input);   //Converting to int
+        std::cin >> input;          //entering number
+        value = std::atoi(input);   //converting to int
         correct = true;
 
         if(value <= _min || value >= _max)
             correct = false;
     }while(!correct);
 
-    return value;                   //Returning value
+    return value;                   //returning value
 }
 
 
 void DeleteData(int pos)
 {
-    std::fstream data("data.txt");          //Opening file
-    std::ofstream otmp("tmp.txt");          //Creating tmp file
-    std::string line;                       //String to get line from data.txt
+    std::fstream data("data.txt");          //opening file
+    std::ofstream otmp("tmp.txt");          //creating tmp file
+    std::string line;                       //string to get line from data.txt
     int counter = 0;
 
-    while(!data.eof()){                     //Put "alive" messages in tmp.txt
+    while(!data.eof()){                     //put "alive" messages in tmp.txt
         std::getline(data, line);
-        if(line.empty())
-            break;
-        if(counter != pos)
-            otmp << line << "\n";
+        if(line.empty())    break;
+        if(counter != pos)  otmp << line << "\n";
         counter++;
     }
 
-    data.close();                           //Closing stream to data.txt
-    std::remove("data.txt");                //Deleting data.txt
-    std::ofstream data_new("data.txt");     //Creating empty data.txt
+    data.close();                           //closing stream to data.txt
+    std::remove("data.txt");                //deleting data.txt
+    std::ofstream data_new("data.txt");     //creating empty data.txt
 
     otmp.close();
-    std::fstream itmp("tmp.txt");           //Creating stream to read from tmp.txt
+    std::fstream itmp("tmp.txt");           //creating stream to read from tmp.txt
 
-    while(!itmp.eof()){                     //Put messages back to data.txt
+    while(!itmp.eof()){                     //put messages back to data.txt
         std::getline(itmp, line);
-        if(line.empty())
-            break;
+        if(line.empty())    break;
         data_new << line << "\n";
     }
 
-    itmp.close();                           //Closing streams
+    itmp.close();                           //closing streams
     data_new.close();
 
-    std::remove("tmp.txt");                 //Deleting file
+    std::remove("tmp.txt");                 //deleting file
 
     if(counter < pos)                       //if
-        std::cout << "No such message.\n";  //Nothing changes
+        std::cout << "No such message.\n";  //nothing changes
 }
 
 void ChangeStatus(int pos)
 {
     std::ifstream idata("data.txt");
-    std::ofstream otmp("tmp.txt");           //creating tmp.txt
+    std::ofstream otmp("tmp.txt");          //creating tmp.txt
     std::string line_to_change;
     std::string tmp_str;
     int line_amount = 0;
@@ -162,27 +159,27 @@ void ChangeStatus(int pos)
 
         otmp << tmp_str << "\n";
 
-        if(line_amount == pos)
+        if(line_amount == pos)              //remembering the line_to_change
             line_to_change = tmp_str;
         line_amount++;
     }
 
-    if(line_amount > pos){              //if such line exists
+    if(line_amount > pos){                  //if such line exists
         idata.close();                                          //opening stream to data,
         std::ofstream odata("data.txt", std::ios_base::trunc);  //deleting everything
         otmp.close();
         std::ifstream itmp("tmp.txt");
 
-        std::string::iterator iter = line_to_change.begin();
-        while(!isspace(*iter))
-            iter++;
-        iter++;                         //now iter looks on 'status'
+        std::string::iterator iter = line_to_change.begin();    //creating iter
+        while(!isspace(*iter))  iter++;
+        iter++;                             //now iter looks on 'status'
 
-        if(*iter == '0') *iter = '1';   //changing the value
+        if(*iter == '0') *iter = '1';       //changing the value
         else *iter = '0';
 
         int counter = 0;
-        while(!itmp.eof()){
+
+        while(!itmp.eof()){                 //returning everything back
             std::getline(itmp, tmp_str);
             if(tmp_str.empty()) break;
 
@@ -191,7 +188,8 @@ void ChangeStatus(int pos)
 
             counter++;
         }
-        odata.close();
+
+        odata.close();                      //close streams and deleting tmp.txt
         itmp.close();
         std::remove("tmp.txt");
     }else

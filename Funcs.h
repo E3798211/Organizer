@@ -8,6 +8,7 @@ void PasswordCheck();                       //Password check
 void AddData();                             //Add data
 void DeleteData(int pos);                   //Delete data
 void ChangeStatus(int pos);                 //Change status
+void ChangePriority(int pos, int pri);      //Change Priority
 
 //Service funcs
 
