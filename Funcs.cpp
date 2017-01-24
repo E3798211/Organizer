@@ -4,6 +4,7 @@
 #include <cctype>
 #include <cstdlib>
 #include "Funcs.h"
+//#include "stdfix.h"
 
 std::string UserEnter()
 {
@@ -109,5 +110,39 @@ int DigitEnter(int _min, int _max)
 }
 
 
+void DeleteData(int pos)
+{
+    std::fstream data("data.txt");          //Opening file
+    std::ofstream otmp("tmp.txt");          //Creating tmp file
+    std::string line;                       //String to get line from data.txt
+    int counter = 0;
 
+    while(!data.eof()){                     //Put "alive" messages in tmp.txt
+        std::getline(data, line);
+        if(line.empty())
+            break;
+        if(counter != pos)
+            otmp << line << "\n";
+        counter++;
+    }
+
+    data.close();                           //Closing stream to data.txt
+    std::remove("data.txt");                //Deleting data.txt
+    std::ofstream data_new("data.txt");     //Creating empty data.txt
+
+    otmp.close();
+    std::fstream itmp("tmp.txt");           //Creating stream to read from tmp.txt
+
+    while(!itmp.eof()){                     //Put messages back to data.txt
+        std::getline(itmp, line);
+        if(line.empty())
+            break;
+        data_new << line << "\n";
+    }
+
+    itmp.close();                           //Closing streams
+    data_new.close();
+
+    std::remove("tmp.txt");                 //Deleting file
+}
 

@@ -17,7 +17,7 @@ int main()
     //PasswordCheck();
     //cout << a;
 
-    AddData();
-
+    //AddData();
+    //DeleteData(3);
 }
 
