@@ -14,9 +14,11 @@ int main()
     //PasswordCheck();
 
     //AddData("Hi, my friend!", 7);
+    //AddData("Ohoho!");
     //DeleteData(3);
     //ChangeStatus(0);
     //ChangePriority(0, 7);
+
     //int c = MessagesAmount();
     //bool c = DigitEnter(-10,1, "-5");
 

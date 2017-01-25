@@ -76,6 +76,12 @@ void AddData(std::string message, int pri)
     data << pri << " " << "0" << " " << message << "\n";        //writing to the file
 }
 
+void AddData(std::string message)
+{
+    std::ofstream data("data.txt", std::ios_base::app);         //open to write to the end
+    data << "0 0" << " " << message << "\n";        //writing to the file
+}
+
 bool DigitEnter(int _min, int _max, std::string input)
 {
     int value;
