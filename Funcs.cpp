@@ -53,20 +53,31 @@ std::string* StrToWord(std::string str)
     std::string* words = new std::string [255];
     int word_num = 0;                               //word's number
     bool prev_is_space = true;                      //shows if previous symbol was space
+    bool quotes_closed = true;
+    bool new_string = true;
 
     std::string::iterator iter = str.begin();
 
     while(iter != str.end()){
         if(!isspace(*iter)){                        //if value is not space
+            if(*iter == '\"'){
+                quotes_closed = !quotes_closed;
+            }
             words[word_num].append(1, *iter);       //put it into the word
             prev_is_space = false;
         }else{                                      //else go to new word
-            if(!prev_is_space)
-                word_num++;
-            prev_is_space = true;
+            words[word_num].append(1, *iter);
+            if(!quotes_closed){
+                words[word_num].append(1, *iter);
+            }else{
+                if(!prev_is_space)
+                    word_num++;
+                prev_is_space = true;
+            }
         }
         iter++;
     }
+
     return words;
 }
 
