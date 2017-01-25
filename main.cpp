@@ -13,10 +13,12 @@ int main()
     //b = StrToWord(UserEnter());
     //PasswordCheck();
 
-    //AddData();
+    //AddData("Hi, my friend!", 7);
     //DeleteData(3);
     //ChangeStatus(0);
     //ChangePriority(0, 7);
     //int c = MessagesAmount();
+    //bool c = DigitEnter(-10,1, "-5");
+
 }
 

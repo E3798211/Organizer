@@ -70,42 +70,23 @@ std::string* StrToWord(std::string str)
     return words;
 }
 
-void AddData()
+void AddData(std::string message, int pri)
 {
     std::ofstream data("data.txt", std::ios_base::app);         //open to write to the end
-    std::string message;                                        //user's message
-    int priority;                                               //message's priority
-    //priority - status - text
-
-    std::cout << "Your message:\n";
-    message = UserEnter();
-
-    std::cout << "Priority:\n";
-    priority = DigitEnter(0, 10);
-
-    data << priority << " " << "0" << " " << message << "\n";   //writing to the file
+    data << pri << " " << "0" << " " << message << "\n";        //writing to the file
 }
 
-int DigitEnter(int _min, int _max)
+bool DigitEnter(int _min, int _max, std::string input)
 {
-    char input[100];                //user's input
     int value;
-    bool correct = true;
 
-    do{
-        if(!correct)
-            std::cout << "Incorrect enter.\n";
+    const char* _input;
+    _input = input.c_str();                 //converting to c-string
 
-        std::cout << "# ";
-        std::cin >> input;          //entering number
-        value = std::atoi(input);   //converting to int
-        correct = true;
-
-        if(value <= _min || value >= _max)
-            correct = false;
-    }while(!correct);
-
-    return value;                   //returning value
+    if(_input == "0")   return true;
+    value = std::atoi(_input);              //converting to int
+    if(value == 0 || value < _min || value > _max)  return false;      //if value is out of range
+    return true;
 }
 
 void DeleteData(int pos)
