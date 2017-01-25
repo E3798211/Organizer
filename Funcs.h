@@ -7,8 +7,9 @@ std::string UserEnter();                    //User's enter
 void PasswordCheck();                       //Password check
 
 void AddData(std::string message, int pri); //Add data.             pri is already checked
-void AddData(std::string message);          //Add data. Priority is 0
+void AddData(std::string message);          //Add data. Priority sets 0.
 void DeleteData(int pos);                   //Delete data           pos is already checked
+void DeleteAll();                           //Delete all data
 void ChangeStatus(int pos);                 //Change status         pos is already checked
 void ChangePriority(int pos, int pri);      //Change Priority       pos is already checked
 

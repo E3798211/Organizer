@@ -10,7 +10,7 @@ int main()
     string* b = new string [100];
 
     //a = UserEnter();
-    //b = StrToWord(UserEnter());
+    //b = StrToWord("Hey! What's up? \"aaa\" ");
     //PasswordCheck();
 
     //AddData("Hi, my friend!", 7);
@@ -22,5 +22,6 @@ int main()
     //int c = MessagesAmount();
     //bool c = DigitEnter(-10,1, "-5");
 
+    //DeleteAll();
 }
 

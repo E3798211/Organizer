@@ -128,6 +128,11 @@ void DeleteData(int pos)
     std::remove("tmp.txt");                 //deleting file
 }
 
+void DeleteAll()
+{
+    std::ofstream delete_all("data.txt", std::ios_base::trunc);
+}
+
 void ChangeStatus(int pos)
 {
     std::ifstream idata("data.txt");
