@@ -108,7 +108,6 @@ int DigitEnter(int _min, int _max)
     return value;                   //returning value
 }
 
-
 void DeleteData(int pos)
 {
     std::fstream data("data.txt");          //opening file
@@ -231,4 +230,20 @@ void ChangePriority(int pos, int pri)
     itmp.close();
     std::remove("tmp.txt");
 }
+
+int MessagesAmount()
+{
+    std::fstream data("data.txt");
+    std::string tmp;
+    int lines_amount = 0;
+
+    while(!data.eof()){
+        std::getline(data, tmp);            //writing to tmp.txt
+        if(tmp.empty())     break;
+        lines_amount++;
+    }
+    return lines_amount;
+}
+
+
 

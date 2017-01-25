@@ -17,5 +17,6 @@ int main()
     //DeleteData(3);
     //ChangeStatus(0);
     //ChangePriority(0, 7);
+    //int c = MessagesAmount();
 }
 

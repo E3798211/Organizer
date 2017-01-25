@@ -14,5 +14,6 @@ void ChangePriority(int pos, int pri);      //Change Priority       pos is alrea
 
 std::string* StrToWord(std::string str);    //String to 'words'. Max amount of 'words' = 255
 int DigitEnter(int _min, int _max);         //Protected enter       Check.Probably useless
+int MessagesAmount();                       //Returns amount of lines in data.txt
 
 #endif // FUNCS_H_INCLUDED
