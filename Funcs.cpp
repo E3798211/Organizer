@@ -140,9 +140,6 @@ void DeleteData(int pos)
     data_new.close();
 
     std::remove("tmp.txt");                 //deleting file
-
-    if(counter < pos)                       //if
-        std::cout << "No such message.\n";  //nothing changes
 }
 
 void ChangeStatus(int pos)
@@ -164,36 +161,32 @@ void ChangeStatus(int pos)
         line_amount++;
     }
 
-    if(line_amount > pos){                  //if such line exists
-        idata.close();                                          //opening stream to data,
-        std::ofstream odata("data.txt", std::ios_base::trunc);  //deleting everything
-        otmp.close();
-        std::ifstream itmp("tmp.txt");
+    idata.close();                                          //opening stream to data,
+    std::ofstream odata("data.txt", std::ios_base::trunc);  //deleting everything
+    otmp.close();
+    std::ifstream itmp("tmp.txt");
 
-        std::string::iterator iter = line_to_change.begin();    //creating iter
-        while(!isspace(*iter))  iter++;
-        iter++;                             //now iter looks on 'status'
+    std::string::iterator iter = line_to_change.begin();    //creating iter
+    while(!isspace(*iter))  iter++;
+    iter++;                             //now iter looks on 'status'
 
-        if(*iter == '0') *iter = '1';       //changing the value
-        else *iter = '0';
+    if(*iter == '0') *iter = '1';       //changing the value
+    else *iter = '0';
 
-        int counter = 0;
+    int counter = 0;
 
-        while(!itmp.eof()){                 //returning everything back
-            std::getline(itmp, tmp_str);
-            if(tmp_str.empty()) break;
+    while(!itmp.eof()){                 //returning everything back
+        std::getline(itmp, tmp_str);
+        if(tmp_str.empty()) break;
 
-            if(counter == pos)  odata << line_to_change << "\n";
-            else                odata << tmp_str << "\n";
+        if(counter == pos)  odata << line_to_change << "\n";
+        else                odata << tmp_str << "\n";
 
-            counter++;
-        }
-
-        odata.close();                      //close streams and deleting tmp.txt
-        itmp.close();
-        std::remove("tmp.txt");
-    }else
-        std::cout << "No such message.\n";
+        counter++;
+    }
+    odata.close();                      //close streams and deleting tmp.txt
+    itmp.close();
+    std::remove("tmp.txt");
 }
 
 void ChangePriority(int pos, int pri)
@@ -215,30 +208,27 @@ void ChangePriority(int pos, int pri)
         line_amount++;
     }
 
-    if(line_amount > pos){                  //if such line exists
-        idata.close();                                          //opening stream to data,
-        std::ofstream odata("data.txt", std::ios_base::trunc);  //deleting everything
-        otmp.close();
-        std::ifstream itmp("tmp.txt");
+    idata.close();                                          //opening stream to data,
+    std::ofstream odata("data.txt", std::ios_base::trunc);  //deleting everything
+    otmp.close();
+    std::ifstream itmp("tmp.txt");
 
-        std::string str = line_to_change.substr(1, std::string::npos);
+    std::string str = line_to_change.substr(1, std::string::npos);
 
-        int counter = 0;
+    int counter = 0;
 
-        while(!itmp.eof()){                 //returning everything back
-            std::getline(itmp, tmp_str);
-            if(tmp_str.empty()) break;
+    while(!itmp.eof()){                 //returning everything back
+        std::getline(itmp, tmp_str);
+        if(tmp_str.empty()) break;
 
-            if(counter == pos)  odata << pri << str << "\n";
-            else                odata << tmp_str << "\n";
+        if(counter == pos)  odata << pri << str << "\n";
+        else                odata << tmp_str << "\n";
 
-            counter++;
-        }
+        counter++;
+    }
 
-        odata.close();                      //close streams and deleting tmp.txt
-        itmp.close();
-        std::remove("tmp.txt");
-    }else
-        std::cout << "No such message.\n";
+    odata.close();                      //close streams and deleting tmp.txt
+    itmp.close();
+    std::remove("tmp.txt");
 }
 
