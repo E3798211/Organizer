@@ -41,3 +41,48 @@ data.txt - хранятся записи по следующему формату:
 Плюшки:
 1. Цветной вывод. Высокопроиритетные красные, затем желтый, затем зеленый.
 2. Пароль вводится так, чтобы не было его видно, символы не отображаются на экране
+
+
+
+
+Commands:
+
+1. add
+	1.1. "string"
+	1.2. <int>
+2. show
+	2.1. all
+	2.2. status
+		2.2.1. done
+		2.2.2. undone
+	2.3. priority
+		2.3.1. high
+		2.3.2. medium
+		2.3.3. low
+		2.3.4. less <int>
+		2.3.5. more <int>
+		2.3.6. between <int> <int>
+3. set
+	3.1. done <int>
+	3.2. undone <int>
+	3.3. priority
+		3.3.1. all <int>
+		3.3.2 <int> <int>
+4. delete
+	4.1. all
+	4.2. status
+		4.2.1. done
+		4.2.2. undone
+	4.3. priority
+		4.3.1. high
+		4.3.2. medium
+		4.3.3. low
+		4.3.4. less <int>
+		4.3.5. more <int>
+		4.3.6. between <int> <int>
+5. change
+	5.1. password
+	5.2. username
+
+===========
+26 functions
