@@ -26,26 +26,18 @@ std::string UserEnter()
     return input;
 }
 
-void PasswordCheck()
+bool PasswordCheck(std::string input)
 {
     std::string password;                       //password
-    std::string input;                          //user's input
 
     std::fstream memory("memo.txt");            //opening memory to get password
     if(!memory.is_open()){
         std::cout << "memo.txt not found.\n";
         exit(1);
     }
-
     getline(memory, password);
-    std::cout << "Enter password.\n";
-
-    while(1){                                   //user will not leave the loop
-        input = UserEnter();                    //until password is incorrect
-        if(input == password)
-            break;
-        std::cout << "Incorrect password.\n";
-    }
+    if(input == password)   return true;
+    return false;
 }
 
 std::string* StrToWord(std::string str)

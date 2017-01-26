@@ -22,7 +22,7 @@ int main()
     cout << b[7] << endl;
     cout << b[8] << endl;
     */
-    //PasswordCheck();
+    //bool c = PasswordCheck("sgf");
 
     //AddData("Hi, my friend!", 7);
     //AddData("Ohoho!");

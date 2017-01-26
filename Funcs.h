@@ -4,7 +4,7 @@
 //Funcs to use in prog
 
 std::string UserEnter();                    //User's enter
-void PasswordCheck();                       //Password check
+bool PasswordCheck(std::string input);      //Password check
 
 void AddData(std::string message, int pri); //Add data.             pri is already checked
 void AddData(std::string message);          //Add data. Priority sets 0.
