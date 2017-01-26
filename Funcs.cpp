@@ -57,11 +57,15 @@ std::string* StrToWord(std::string str)
     bool new_string = true;
 
     std::string::iterator iter = str.begin();
+    std::string::iterator tmp = iter;
 
     while(iter != str.end()){
         if(!isspace(*iter)){                        //if value is not space
             if(*iter == '\"'){
                 quotes_closed = !quotes_closed;
+            }
+            if(quotes_closed){
+                if(*(tmp--) == '\"')    word_num++;
             }
             words[word_num].append(1, *iter);       //put it into the word
             prev_is_space = false;
@@ -75,6 +79,7 @@ std::string* StrToWord(std::string str)
                 prev_is_space = true;
             }
         }
+        tmp = iter;
         iter++;
     }
 

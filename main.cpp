@@ -10,7 +10,7 @@ int main()
     string* b = new string [100];
 
     //a = UserEnter();
-    //b = StrToWord("Hey! What's up? \"aaa s aaa\"\"gf esrvg sevg ");
+    //b = StrToWord("\"aaa\"jfh irguhe ghue gih\"qwrt\"");
     /*
     cout << b[0] << endl;
     cout << b[1] << endl;
@@ -19,7 +19,8 @@ int main()
     cout << b[4] << endl;
     cout << b[5] << endl;
     cout << b[6] << endl;
-    *///PasswordCheck();
+    */
+    //PasswordCheck();
 
     //AddData("Hi, my friend!", 7);
     //AddData("Ohoho!");
