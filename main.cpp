@@ -31,6 +31,7 @@ int main()
     //int c = MessagesAmount();
     //bool c = DigitEnter(-10,1, "-5");
     //DeleteAll();
+    //bool c = IsDigit("45.1");
 
     Organizer();
 }

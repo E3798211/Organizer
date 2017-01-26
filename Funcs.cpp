@@ -82,7 +82,7 @@ std::string* StrToWord(std::string str)
     return words;
 }
 
-void AddData(std::string message, int pri)
+void AddData(std::string message, std::string pri)
 {
     std::ofstream data("data.txt", std::ios_base::app);         //open to write to the end
     data << pri << " " << "0" << " " << message << "\n";        //writing to the file
@@ -249,5 +249,11 @@ int MessagesAmount()
     return lines_amount;
 }
 
-
+bool IsDigit(std::string input)
+{
+    if(input == "0")    return true;
+    int value = std::atoi(input.c_str());
+    if(value != 0)  return true;
+    return false;
+}
 
