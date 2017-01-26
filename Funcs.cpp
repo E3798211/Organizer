@@ -67,7 +67,10 @@ std::string* StrToWord(std::string str)
                 prev_is_space = true;
             }
         }else{
-            if(!isspace(*(tmp--)) && char_is_quotes)     word_num++;
+            if(!isspace(*(tmp--)) && char_is_quotes){
+                word_num++;
+                if(iter == str.begin()) word_num--;
+            }
             //if char is quotes and previous is not a space begin new word
             words[word_num].append(1, *iter);                   //put symbol into the word
             char_is_quotes = false;

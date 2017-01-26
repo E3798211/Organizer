@@ -8,7 +8,7 @@ int main()
     string* b = new string [100];
 
     //a = UserEnter();
-    //b = StrToWord("aAa\tbb\v\"  qwerty  \"\"dDd\"");
+    //b = StrToWord(" s\"qwerty\"g\"dDd\"");
     /*
     cout << b[0] << endl;
     cout << b[1] << endl;
@@ -32,6 +32,6 @@ int main()
     //bool c = DigitEnter(-10,1, "-5");
     //DeleteAll();
 
-    //Organizer();
+    Organizer();
 }
 
