@@ -10,7 +10,7 @@ int main()
     string* b = new string [100];
 
     //a = UserEnter();
-    //b = StrToWord("\"aaa\"jfh irguhe ghue gih\"qwrt\"");
+    //b = StrToWord("aAa\tbb\v\"  qwerty  \"\"dDd\"");
     /*
     cout << b[0] << endl;
     cout << b[1] << endl;
@@ -19,6 +19,8 @@ int main()
     cout << b[4] << endl;
     cout << b[5] << endl;
     cout << b[6] << endl;
+    cout << b[7] << endl;
+    cout << b[8] << endl;
     */
     //PasswordCheck();
 

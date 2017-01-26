@@ -53,31 +53,37 @@ std::string* StrToWord(std::string str)
     std::string* words = new std::string [255];
     int word_num = 0;                               //word's number
     bool prev_is_space = true;                      //shows if previous symbol was space
-    bool quotes_closed = true;
-    bool new_string = true;
+    bool quotes_closed = true;                      //shows if quotes are closed
+    bool char_is_quotes = true;                       //shows if quotes have just opened
 
     std::string::iterator iter = str.begin();
     std::string::iterator tmp = iter;
 
     while(iter != str.end()){
-        if(!isspace(*iter)){                        //if value is not space
-            if(*iter == '\"'){
-                quotes_closed = !quotes_closed;
+        if(*iter == '\"'){                                      //open/close quotes
+            quotes_closed = !quotes_closed;
+            char_is_quotes = true;                              //this symbol is quotes
+        }
+
+        if(quotes_closed){                                      //if quotes are closed
+            if(*(tmp--) == '\"' && char_is_quotes){
+                word_num++;
+                prev_is_space = true;
             }
-            if(quotes_closed){
-                if(*(tmp--) == '\"')    word_num++;
-            }
-            words[word_num].append(1, *iter);       //put it into the word
-            prev_is_space = false;
-        }else{                                      //else go to new word
-            words[word_num].append(1, *iter);
-            if(!quotes_closed){
+                                                                //start new word
+            if(!isspace(*iter)){                                //put symbol into the word
                 words[word_num].append(1, *iter);
+                prev_is_space = false;
             }else{
-                if(!prev_is_space)
+                if(!prev_is_space && char_is_quotes)
                     word_num++;
                 prev_is_space = true;
             }
+        }else{
+            if(!isspace(*(tmp--)) && char_is_quotes)     word_num++;
+            //if char is quotes and previous is not a space begin new word
+            words[word_num].append(1, *iter);                   //put symbol into the word
+            char_is_quotes = false;
         }
         tmp = iter;
         iter++;
