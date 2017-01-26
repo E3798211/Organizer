@@ -1,6 +1,12 @@
 #ifndef FUNCS_H_INCLUDED
 #define FUNCS_H_INCLUDED
 
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cctype>
+#include <cstdlib>
+
 //Funcs to use in prog
 
 std::string UserEnter();                    //User's enter

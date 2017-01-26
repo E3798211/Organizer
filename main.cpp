@@ -1,6 +1,4 @@
-#include <iostream>
-#include <cstdlib>
-#include "Funcs.h"
+#include "Organizer.h"
 
 using namespace std;
 
@@ -32,7 +30,8 @@ int main()
 
     //int c = MessagesAmount();
     //bool c = DigitEnter(-10,1, "-5");
-
     //DeleteAll();
+
+    //Organizer();
 }
 
