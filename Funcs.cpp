@@ -246,7 +246,7 @@ int MessagesAmount()
         if(tmp.empty())     break;
         lines_amount++;
     }
-    return lines_amount;
+    return lines_amount - 1;
 }
 
 bool IsDigit(std::string input)

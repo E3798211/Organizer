@@ -11,11 +11,11 @@ void Organizer()
         commands = StrToWord(UserEnter());
 
         if(commands[0] == "add"){
-            //cout << 1;
             Add(commands, message_amount);
         }else if(commands[0] == "show"){
             //cout << 2;
         }else if(commands[0] == "set"){
+            Set(commands, message_amount);
             //cout << 3;
         }else if(commands[0] == "delete"){
             //cout << 4;
@@ -35,13 +35,12 @@ void Organizer()
     }
 }
 
-
 void Add(std::string* cmds, int m_amnt)
 {
     string msg;
 
     if(cmds[1][0] == '\"' && cmds[1][cmds[1].length() - 1] == '\"'){
-        if(cmds[2].empty()){                        //first function
+        if(cmds[2].empty()){                        //1-st function
 
             if(cmds[1] != "\""){
                 //if everything is OK
@@ -52,7 +51,7 @@ void Add(std::string* cmds, int m_amnt)
                 //else
             }else   cout << "Invalid message.";     //==========
 
-        }else if(IsDigit(cmds[2])){                 //second function
+        }else if(IsDigit(cmds[2])){                 //2-nd function
 
             if(cmds[3].empty()){
                 if(DigitEnter(0, 9, cmds[2])){
@@ -61,13 +60,49 @@ void Add(std::string* cmds, int m_amnt)
                     AddData(msg, cmds[2]);
                     cout << "New message created.";
                 }else
-                    cout << "Priority lies out of range.";
+                    cout << "Priority is out of range.";
             }else
-                cout << "Unknown command.";
+                cout << "Unknown command < " << cmds[3] << " > .";
                                                     //==========
         }else
-            cout << "Incorrect enter. Empty message or invalid < priority > enter.";
+            cout << "Incorrect enter. Empty message or invalid priority enter.";
     }else
         cout << "Incorrect enter. Message expected after < add > .";
 }
+
+void Set(std::string* cmds, int m_amnt)
+{
+    int pos;
+    int pri;
+
+    if(cmds[1] == "status"){                    //1-st function
+
+        //FIXME
+
+    }else if(cmds[1] == "priority"){            //2-nd function
+
+        if(IsDigit(cmds[2])){
+            if(IsDigit(cmds[3])){
+                if(cmds[4].empty()){
+                    if(DigitEnter(0, m_amnt, cmds[2])){
+                        if(DigitEnter(0, 9, cmds[3])){
+                            pos = atoi(cmds[2].c_str());
+                            pri = atoi(cmds[3].c_str());
+                            ChangePriority(pos, pri);
+                            cout << "Priority changed.";
+                        }else
+                            cout << "Priority is out of range.";
+                    }else
+                        cout << "No such message.";
+                }else
+                    cout << "Unknown command < " << cmds[4] << " > .";
+            }else
+                cout << "Incorrect enter. Priority expected after position.";
+        }else
+            cout << "Incorrect enter. Position expected after < priority > .";
+
+    }else
+        cout << "Unknown command < " << cmds[1] << " > .";
+}
+
 

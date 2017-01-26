@@ -5,10 +5,10 @@
 
 void Organizer();
 void Add(std::string* cmds, int m_amnt);
-void Show(std::string* cmds);
-void Set(std::string* cmds);
-void Delete(std::string* cmds);
-void Change(std::string* cmds);
-void Close(std::string* cmds);
+void Show(std::string* cmds, int m_amnt);
+void Set(std::string* cmds, int m_amnt);
+void Delete(std::string* cmds, int m_amnt);
+void Change(std::string* cmds, int m_amnt);
+void Close(std::string* cmds, int m_amnt);
 
 #endif // ORGANIZER_H_INCLUDED

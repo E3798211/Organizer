@@ -65,12 +65,18 @@ Commands:
 		2.3.6. between <int> <int>
 		2.3.7. decrease
 		2.3.8. increase
+
 3. set
-	3.1. done <int>
-	3.2. undone <int>
-	3.3. priority
-		3.3.1. all <int>
-		3.3.2 <int> <int>
+	3.1. status
+		3.1.1. <pos>
+			3.1.1.1. done
+			3.1.1.2. undone
+		3.1.2. <all>
+			3.1.2.1. done
+			3.1.2.2. undone
+	3.2. priority <pos> <pri>
+
+
 4. delete
 	4.1. all
 	4.2. status
@@ -88,4 +94,4 @@ Commands:
 	5.2. username
 6. close org
 ===========
-29 functions
+30 functions
