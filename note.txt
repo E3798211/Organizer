@@ -49,8 +49,8 @@ data.txt - хранятся записи по следующему формату:
 Commands:
 
 1. add------------------------------------------DONE
-	1.1. "string"
-	1.2. "string" <int>
+	1.1. "msg"
+	1.2. "msg" <pri>
 2. show-----------------------------------------UNDONE
 	2.1. all
 	2.2. status
@@ -60,9 +60,9 @@ Commands:
 		2.3.1. high
 		2.3.2. medium
 		2.3.3. low
-		2.3.4. lower <int>
-		2.3.5. higher <int>
-		2.3.6. between <int> <int>
+		2.3.4. lower <pri>
+		2.3.5. higher <pri>
+		2.3.6. between <pri1> <pri2>
 		2.3.7. decrease
 		2.3.8. increase
 
@@ -83,9 +83,9 @@ Commands:
 		4.2.1. done
 		4.2.2. undone
 	4.3. priority
-		4.3.1. high
-		4.3.2. medium
-		4.3.3. low
+		4.3.1. high (0-2)
+		4.3.2. medium (3-6)
+		4.3.3. low (7-9)
 		4.3.4. lower <int>
 		4.3.5. higher <int>
 		4.3.6. between <int> <int> (сделать if и свапать инты, если надо)

@@ -154,7 +154,12 @@ void Set(std::string* cmds, int m_amnt)
 
 void Delete(std::string* cmds, int m_amnt)
 {
+    int pos;
+    int pri;
+    string tmp;
+
     if(cmds[1] == "all"){                           //1-st function
+//================================================================================
         if(cmds[2].empty()){
             if(Answer()){
                 DeleteAll();
@@ -164,8 +169,22 @@ void Delete(std::string* cmds, int m_amnt)
         }else
             cout << "Unknown command < " << cmds[2] << " > .";
     }else if(cmds[1] == "status"){                  //2-nd function
-        //FIXME
+        if(cmds[2] == "done"){                      //2.1. function
+//================================================================================
+            if(cmds[3].empty()){
+                //FIXME
+            }else
+                cout << "Unknown command < " << cmds[3] << " > .";
+        }else if(cmds[2] == "undone"){
+//================================================================================
+            if(cmds[3].empty()){
+                //FIXME
+            }else
+                cout << "Unknown command < " << cmds[3] << " > .";
+        }else
+            cout << "Unknown command < " << cmds[2] << " > .";
     }else if(cmds[1] == "priority"){                //3-rd function
+//================================================================================
         //FIXME
     }else{
         cout << "Unknown command < " << cmds[1] << " > .";
@@ -211,5 +230,24 @@ bool Answer()
 
         delete [] words;
     }
+}
+
+bool MsgStatus(std::string line)
+{
+    std::string* words = StrToWord(line);
+    if(words[1] == "1"){
+        delete [] words;
+        return true;
+    }
+    delete [] words;
+    return false;
+}
+
+int MsgPriority(std::string line)
+{
+    std::string* words = StrToWord(line);
+    int value = atoi(words[0].c_str());
+    delete [] words;
+    return value;
 }
 

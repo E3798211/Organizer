@@ -13,5 +13,7 @@ void Close(std::string* cmds, int m_amnt);
 
 void SetStatus(int pos, int status);
 bool Answer();
+bool MsgStatus(std::string line);
+int MsgPriority(std::string line);
 
 #endif // ORGANIZER_H_INCLUDED
