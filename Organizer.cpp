@@ -18,7 +18,7 @@ void Organizer()
         }else if(commands[0] == "set"){
             Set(commands, message_amount);
         }else if(commands[0] == "delete"){
-            //cout << 4;
+            Delete(commands, message_amount);
         }else if(commands[0] == "change"){
             //cout << 5;
         }else if(commands[0] == "close"){
@@ -155,13 +155,21 @@ void Set(std::string* cmds, int m_amnt)
 void Delete(std::string* cmds, int m_amnt)
 {
     if(cmds[1] == "all"){                           //1-st function
-        //FIXME
+        if(cmds[2].empty()){
+            if(Answer()){
+                DeleteAll();
+                cout << "Everything deleted.";
+            }else
+                cout << "Delete aborted.";
+        }else
+            cout << "Unknown command < " << cmds[2] << " > .";
     }else if(cmds[1] == "status"){                  //2-nd function
         //FIXME
     }else if(cmds[1] == "priority"){                //3-rd function
         //FIXME
-    }else
+    }else{
         cout << "Unknown command < " << cmds[1] << " > .";
+    }
 }
 
 void SetStatus(int pos, int status)
@@ -181,12 +189,10 @@ void SetStatus(int pos, int status)
 bool Answer()
 {
     string* words;
-    string tmp;
 
     cout << "Are you sure? < Y > - YES, < N > - NO" << endl;
     while(1){
         words = StrToWord(UserEnter());
-        cout << "words[0] = " << words[0] << endl;
 
         if(words[0] == "Y" || words[0] == "y" || words[0] == "yes"){
             if(words[1].empty()){
