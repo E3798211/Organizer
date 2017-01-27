@@ -41,14 +41,15 @@ void Add(std::string* cmds, int m_amnt)
 
     if(cmds[1][0] == '\"' && cmds[1][cmds[1].length() - 1] == '\"'){    //1-st function
 //================================================================================
+//================================================================================
         if(cmds[2].empty()){
             if(cmds[1] != "\""){
                     AddMsg(cmds);       //+++++
             }else
                 cout << "Invalid message.";
 //================================================================================
-        }else if(IsDigit(cmds[2])){                 //2-nd function
 //================================================================================
+        }else if(IsDigit(cmds[2])){                 //2-nd function
             if(cmds[3].empty()){
                 if(DigitEnter(0, 9, cmds[2])){
                     AddMsgPri(cmds);    //+++++
@@ -111,6 +112,7 @@ void Set(std::string* cmds, int m_amnt)
         }else
             cout << "Unknown command < " << cmds[2] << " > .";
 //================================================================================
+//================================================================================
     }else if(cmds[1] == "priority"){            //2-nd function
 
         if(IsDigit(cmds[2])){
@@ -146,44 +148,81 @@ void Delete(std::string* cmds, int m_amnt)
             DeleteAllF();                   //+++++
         }else
             cout << "Unknown command < " << cmds[2] << " > .";
+//================================================================================
+//================================================================================
     }else if(cmds[1] == "status"){                  //2-nd function
         if(cmds[2] == "done"){                      //2.1. function
-//================================================================================
             if(cmds[3].empty()){
                 DeleteStatusDone(m_amnt);       //+++++
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
-        }else if(cmds[2] == "undone"){
 //================================================================================
+        }else if(cmds[2] == "undone"){
             if(cmds[3].empty()){
                 DeleteStatusUndone(m_amnt);     //+++++
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
         }else
             cout << "Unknown command < " << cmds[2] << " > .";
-    }else if(cmds[1] == "priority"){                //3-rd function
 //================================================================================
+//================================================================================
+    }else if(cmds[1] == "priority"){                //3-rd function
         if(cmds[2] == "high"){
             if(cmds[3].empty()){
                 DeletePriorityHigh(m_amnt);     //+++++
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
+//================================================================================
         }else if(cmds[2] == "medium"){
             if(cmds[3].empty()){
                 DeletePriorityMedium(m_amnt);   //+++++
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
+//================================================================================
         }else if(cmds[2] == "low"){
             if(cmds[3].empty()){
                 DeletePriorityLow(m_amnt);      //+++++
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
+//================================================================================
         }else if(cmds[2] == "higher"){
-            //FIXME
+            if(IsDigit(cmds[3])){
+                if(DigitEnter(0, 9, cmds[3])){
+                    if(cmds[4].empty()){
+                        DeletePriorityHigher(cmds, m_amnt);
+                    }else
+                        cout << "Unknown command < " << cmds[4] << " > .";
+                }else
+                    cout << "Priority is out of range.";
+            }else
+                cout << "Invalid enter. Expected priority value.";
+//================================================================================
         }else if(cmds[2] == "lower"){
-            //FIXME
+            if(IsDigit(cmds[3])){
+                if(DigitEnter(0, 9, cmds[3])){
+                    if(cmds[4].empty()){
+                        DeletePriorityLower(cmds, m_amnt);
+                    }else
+                        cout << "Unknown command < " << cmds[4] << " > .";
+                }else
+                    cout << "Priority is out of range.";
+            }else
+                cout << "Invalid enter. Expected priority value.";
+//================================================================================
         }else if(cmds[2] == "between"){
-            //FIXME
+            if(IsDigit(cmds[3])){
+                if(IsDigit(cmds[4])){
+                    if(cmds[5].empty()){
+                        if(DigitEnter(0, 9, cmds[3]) && DigitEnter(0, 9, cmds[4])){
+                            DeletePriorityBetween(cmds, m_amnt);    //+++++
+                        }else
+                            cout << "Priority is out of range.";
+                    }else
+                        cout << "Unknown command < " << cmds[5] << " > .";
+                }else
+                    cout << "Invalid enter. Expected priority value.";
+            }else
+                cout << "Invalid enter. Expected priority value.";
         }else
             cout << "Unknown command < " << cmds[2] << " > .";
     }else{
@@ -404,5 +443,74 @@ void DeletePriorityMedium(int m_amnt)
     }else
         cout << "Delete aborted.";
 }
+
+void DeletePriorityHigher(std::string* cmds, int m_amnt)
+{
+    int i = 0;
+
+    if(Answer()){
+        for(int k = atoi(cmds[3].c_str()); k <= 9; k++){
+            while(i <= m_amnt){
+                if(MsgPriority(GetLine(i)) >= k){
+                    DeleteData(i);
+                    m_amnt = MessagesAmount();
+                    i = -1;
+                }
+                i++;
+            }
+        }
+        cout << "Messages deleted.";
+    }else
+        cout << "Delete aborted.";
+}
+
+void DeletePriorityLower(std::string* cmds, int m_amnt)
+{
+    int i = 0;
+
+    if(Answer()){
+        for(int k = atoi(cmds[3].c_str()); k >= 0; k--){
+            while(i <= m_amnt){
+                if(MsgPriority(GetLine(i)) <= k){
+                    DeleteData(i);
+                    m_amnt = MessagesAmount();
+                    i = -1;
+                }
+                i++;
+            }
+        }
+        cout << "Messages deleted.";
+    }else
+        cout << "Delete aborted.";
+}
+
+void DeletePriorityBetween(std::string* cmds, int m_amnt)
+{
+    int i = 0;
+    int _min = atoi(cmds[3].c_str());
+    int _max = atoi(cmds[4].c_str());
+    int tmp;
+
+    if(_min > _max){    //swap
+        tmp = _min;
+        _min = _max;
+        _max = tmp;
+    }
+
+    if(Answer()){
+        while(i <= m_amnt){
+            if(MsgPriority(GetLine(i)) >= _min && MsgPriority(GetLine(i)) <= _max){
+                DeleteData(i);
+                m_amnt = MessagesAmount();
+                i = 0;
+                continue;
+            }
+            i++;
+        }
+        cout << "Messages deleted.";
+    }else
+        cout << "Delete aborted.";
+}
+
 
 
