@@ -26,6 +26,9 @@ void SetPriority(std::string* cmds);
 void DeleteAllF();
 void DeleteStatusDone(int m_amnt);
 void DeleteStatusUndone(int m_amnt);
+void DeletePriorityHigh(int m_amnt);
+void DeletePriorityLow(int m_amnt);
+void DeletePriorityMedium(int m_amnt);
 
 
 #endif // ORGANIZER_H_INCLUDED

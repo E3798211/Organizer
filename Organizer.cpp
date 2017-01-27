@@ -150,20 +150,42 @@ void Delete(std::string* cmds, int m_amnt)
         if(cmds[2] == "done"){                      //2.1. function
 //================================================================================
             if(cmds[3].empty()){
-                DeleteStatusDone(m_amnt);   //+++++
+                DeleteStatusDone(m_amnt);       //+++++
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
         }else if(cmds[2] == "undone"){
 //================================================================================
             if(cmds[3].empty()){
-                DeleteStatusUndone(m_amnt); //+++++
+                DeleteStatusUndone(m_amnt);     //+++++
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
         }else
             cout << "Unknown command < " << cmds[2] << " > .";
     }else if(cmds[1] == "priority"){                //3-rd function
 //================================================================================
-        //FIXME
+        if(cmds[2] == "high"){
+            if(cmds[3].empty()){
+                DeletePriorityHigh(m_amnt);     //+++++
+            }else
+                cout << "Unknown command < " << cmds[3] << " > .";
+        }else if(cmds[2] == "medium"){
+            if(cmds[3].empty()){
+                DeletePriorityMedium(m_amnt);   //+++++
+            }else
+                cout << "Unknown command < " << cmds[3] << " > .";
+        }else if(cmds[2] == "low"){
+            if(cmds[3].empty()){
+                DeletePriorityLow(m_amnt);      //+++++
+            }else
+                cout << "Unknown command < " << cmds[3] << " > .";
+        }else if(cmds[2] == "higher"){
+            //FIXME
+        }else if(cmds[2] == "lower"){
+            //FIXME
+        }else if(cmds[2] == "between"){
+            //FIXME
+        }else
+            cout << "Unknown command < " << cmds[2] << " > .";
     }else{
         cout << "Unknown command < " << cmds[1] << " > .";
     }
@@ -326,8 +348,61 @@ void DeleteStatusUndone(int m_amnt)
         cout << "Delete aborted.";
 }
 
+void DeletePriorityHigh(int m_amnt)
+{
+    int i = 0;
 
+    if(Answer()){
+        while(i <= m_amnt){
+            if(MsgPriority(GetLine(i)) >= 7){
+                DeleteData(i);
+                m_amnt = MessagesAmount();
+                i = 0;
+                continue;
+            }
+        i++;
+        }
+        cout << "Messages deleted.";
+    }else
+        cout << "Delete aborted.";
+}
 
+void DeletePriorityLow(int m_amnt)
+{
+    int i = 0;
 
+    if(Answer()){
+        while(i <= m_amnt){
+            if(MsgPriority(GetLine(i)) <= 2){
+                DeleteData(i);
+                m_amnt = MessagesAmount();
+                i = 0;
+                continue;
+            }
+        i++;
+        }
+        cout << "Messages deleted.";
+    }else
+        cout << "Delete aborted.";
+}
+
+void DeletePriorityMedium(int m_amnt)
+{
+    int i = 0;
+
+    if(Answer()){
+        while(i <= m_amnt){
+            if((MsgPriority(GetLine(i)) >= 3) && (MsgPriority(GetLine(i)) <= 6)){
+                DeleteData(i);
+                m_amnt = MessagesAmount();
+                i = 0;
+                continue;
+            }
+        i++;
+        }
+        cout << "Messages deleted.";
+    }else
+        cout << "Delete aborted.";
+}
 
 
