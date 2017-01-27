@@ -12,5 +12,6 @@ void Change(std::string* cmds, int m_amnt);
 void Close(std::string* cmds, int m_amnt);
 
 void SetStatus(int pos, int status);
+bool Answer();
 
 #endif // ORGANIZER_H_INCLUDED

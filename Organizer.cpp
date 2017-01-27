@@ -152,7 +152,17 @@ void Set(std::string* cmds, int m_amnt)
         cout << "Unknown command < " << cmds[1] << " > .";
 }
 
-
+void Delete(std::string* cmds, int m_amnt)
+{
+    if(cmds[1] == "all"){                           //1-st function
+        //FIXME
+    }else if(cmds[1] == "status"){                  //2-nd function
+        //FIXME
+    }else if(cmds[1] == "priority"){                //3-rd function
+        //FIXME
+    }else
+        cout << "Unknown command < " << cmds[1] << " > .";
+}
 
 void SetStatus(int pos, int status)
 {
@@ -166,5 +176,34 @@ void SetStatus(int pos, int status)
     if(value != status)     ChangeStatus(pos);
 
     delete [] words;
+}
+
+bool Answer()
+{
+    string* words;
+    string tmp;
+
+    cout << "Are you sure? < Y > - YES, < N > - NO" << endl;
+    while(1){
+        words = StrToWord(UserEnter());
+        cout << "words[0] = " << words[0] << endl;
+
+        if(words[0] == "Y" || words[0] == "y" || words[0] == "yes"){
+            if(words[1].empty()){
+                return true;
+            }else
+                cout << "Unknown command < " << words[1] << " > .";
+        }else if(words[0] == "N" || words[0] == "n" || words[0] == "no"){
+            if(words[1].empty()){
+                return false;
+            }else
+                cout << "Unknown command < " << words[1] << " > .";
+        }else if(words[0] == "abort"){
+            return false;
+        }else
+            cout << "Unknown command < " << words[0] << " > ." << endl;
+
+        delete [] words;
+    }
 }
 

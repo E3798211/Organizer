@@ -35,6 +35,8 @@ int main()
     //cout << GetLine(3);
 
     //SetStatus(2, 0);
+    //if(Answer())    cout << 1;
+
     Organizer();
 }
 
