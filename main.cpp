@@ -35,6 +35,6 @@ int main()
     //cout << GetLine(3);
 
     //SetStatus(2, 0);
-    //Organizer();
+    Organizer();
 }
 

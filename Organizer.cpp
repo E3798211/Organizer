@@ -5,9 +5,10 @@ using namespace std;
 void Organizer()
 {
     std::string* commands;      //user's commands
-    int message_amount = MessagesAmount();
+    int message_amount;
 
     while(1){
+        message_amount = MessagesAmount();
         commands = StrToWord(UserEnter());
 
         if(commands[0] == "add"){
@@ -30,8 +31,8 @@ void Organizer()
         }
 
         cout << endl;
+        cout << endl;
         delete [] commands;
-
     }
 }
 
@@ -83,22 +84,17 @@ void Set(std::string* cmds, int m_amnt)
 
             if(cmds[3] == "done"){                  //1.2.1. function
                 if(cmds[4].empty()){
-                    if(DigitEnter(0, m_amnt, cmds[2])){
-                        //FIXME
-
-                    }else
-                        cout << "No such message.";
-
+                    for(int i = 0; i < m_amnt + 1; i++)
+                        SetStatus(i, 1);
+                    cout << "Status changed.";
                 }else
                     cout << "Unknown command < " << cmds[4] << " > .";
                                                     //==========
             }else if(cmds[3] == "undone"){          //1.2.2. function
                 if(cmds[4].empty()){
-                    if(DigitEnter(0, m_amnt, cmds[2])){
-                        //FIXME
-                    }else
-                        cout << "No such message.";
-
+                    for(int i = 0; i < m_amnt + 1; i++)
+                        SetStatus(i, 0);
+                    cout << "Status changed.";
                 }else
                     cout << "Unknown command < " << cmds[4] << " > .";
                                                     //==========
