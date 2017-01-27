@@ -141,5 +141,7 @@ void SetStatus(int pos, int status)
     int value = atoi(words[1].c_str());
 
     if(value != status)     ChangeStatus(pos);
+
+    delete [] words;
 }
 
