@@ -16,4 +16,16 @@ bool Answer();
 bool MsgStatus(std::string line);
 int MsgPriority(std::string line);
 
+void AddMsg(std::string* cmds);
+void AddMsgPri(std::string* cmds);
+void SetStatusPosDone(std::string* cmds);
+void SetStatusPosUndone(std::string* cmds);
+void SetStatusAllDone(std::string* cmds, int m_amnt);
+void SetStatusAllUndone(std::string* cmds, int m_amnt);
+void SetPriority(std::string* cmds);
+void DeleteAllF();
+void DeleteStatusDone(int m_amnt);
+void DeleteStatusUndone(int m_amnt);
+
+
 #endif // ORGANIZER_H_INCLUDED

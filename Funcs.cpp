@@ -101,7 +101,7 @@ bool DigitEnter(int _min, int _max, std::string input)
     const char* _input;
     _input = input.c_str();                 //converting to c-string
 
-    if(_input == "0")   return true;
+    if(input == "0")   return true;
     value = std::atoi(_input);              //converting to int
     if(value == 0 || value < _min || value > _max)  return false;      //if value is out of range
     return true;

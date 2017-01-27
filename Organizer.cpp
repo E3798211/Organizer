@@ -43,11 +43,7 @@ void Add(std::string* cmds, int m_amnt)
 //================================================================================
         if(cmds[2].empty()){
             if(cmds[1] != "\""){
-                msg = cmds[1].substr(1, string::npos);      //creating msg correct
-                msg.erase(msg.length() - 1, string::npos);
-                AddData(msg);
-                cout << "New message created.";
-
+                    AddMsg(cmds);       //+++++
             }else
                 cout << "Invalid message.";
 //================================================================================
@@ -55,10 +51,7 @@ void Add(std::string* cmds, int m_amnt)
 //================================================================================
             if(cmds[3].empty()){
                 if(DigitEnter(0, 9, cmds[2])){
-                    msg = cmds[1].substr(1, string::npos);  //creating msg correct
-                    msg.erase(msg.length() - 1, string::npos);
-                    AddData(msg, cmds[2]);
-                    cout << "New message created.";
+                    AddMsgPri(cmds);    //+++++
                 }else
                     cout << "Priority is out of range.";
             }else
@@ -81,9 +74,7 @@ void Set(std::string* cmds, int m_amnt)
             if(cmds[3] == "done"){
                 if(DigitEnter(0, m_amnt, cmds[2])){
                     if(cmds[4].empty()){
-                        pos = atoi(cmds[2].c_str());
-                        SetStatus(pos, 1);
-                        cout << "Status changed.";
+                        SetStatusPosDone(cmds);     //+++++
                     }else
                         cout << "Unknown command < " << cmds[4] << " > .";
                 }else
@@ -92,9 +83,7 @@ void Set(std::string* cmds, int m_amnt)
             }else if(cmds[3] == "undone"){                  //1.2.2 function
                 if(DigitEnter(0, m_amnt, cmds[2])){
                     if(cmds[4].empty()){
-                        pos = atoi(cmds[2].c_str());
-                        SetStatus(pos, 0);
-                        cout << "Status changed.";
+                        SetStatusPosUndone(cmds);   //+++++
                     }else
                         cout << "Unknown command < " << cmds[4] << " > .";
                 }else
@@ -106,17 +95,13 @@ void Set(std::string* cmds, int m_amnt)
 //================================================================================
             if(cmds[3] == "done"){                  //1.2.1. function
                 if(cmds[4].empty()){
-                    for(int i = 0; i < m_amnt + 1; i++)
-                        SetStatus(i, 1);
-                    cout << "Status changed.";
+                    SetStatusAllDone(cmds, m_amnt); //+++++
                 }else
                     cout << "Unknown command < " << cmds[4] << " > .";
 //================================================================================
             }else if(cmds[3] == "undone"){          //1.2.2. function
                 if(cmds[4].empty()){
-                    for(int i = 0; i < m_amnt + 1; i++)
-                        SetStatus(i, 0);
-                    cout << "Status changed.";
+                    SetStatusAllUndone(cmds, m_amnt);//+++++
                 }else
                     cout << "Unknown command < " << cmds[4] << " > .";
 //================================================================================
@@ -133,10 +118,7 @@ void Set(std::string* cmds, int m_amnt)
                 if(cmds[4].empty()){
                     if(DigitEnter(0, m_amnt, cmds[2])){
                         if(DigitEnter(0, 9, cmds[3])){
-                            pos = atoi(cmds[2].c_str());
-                            pri = atoi(cmds[3].c_str());
-                            ChangePriority(pos, pri);
-                            cout << "Priority changed.";
+                            SetPriority(cmds);  //+++++
                         }else
                             cout << "Priority is out of range.";
                     }else
@@ -161,24 +143,20 @@ void Delete(std::string* cmds, int m_amnt)
     if(cmds[1] == "all"){                           //1-st function
 //================================================================================
         if(cmds[2].empty()){
-            if(Answer()){
-                DeleteAll();
-                cout << "Everything deleted.";
-            }else
-                cout << "Delete aborted.";
+            DeleteAllF();                   //+++++
         }else
             cout << "Unknown command < " << cmds[2] << " > .";
     }else if(cmds[1] == "status"){                  //2-nd function
         if(cmds[2] == "done"){                      //2.1. function
 //================================================================================
             if(cmds[3].empty()){
-                //FIXME
+                DeleteStatusDone(m_amnt);   //+++++
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
         }else if(cmds[2] == "undone"){
 //================================================================================
             if(cmds[3].empty()){
-                //FIXME
+                DeleteStatusUndone(m_amnt); //+++++
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
         }else
@@ -250,4 +228,106 @@ int MsgPriority(std::string line)
     delete [] words;
     return value;
 }
+
+void AddMsg(std::string* cmds)
+{
+    string msg = cmds[1].substr(1, string::npos);      //creating msg correct
+
+    msg.erase(msg.length() - 1, string::npos);
+    AddData(msg);
+    cout << "New message created.";
+}
+
+void AddMsgPri(std::string* cmds)
+{
+    string msg = cmds[1].substr(1, string::npos);  //creating msg correct
+
+    msg.erase(msg.length() - 1, string::npos);
+    AddData(msg, cmds[2]);
+    cout << "New message created.";
+}
+
+void SetStatusPosDone(std::string* cmds)
+{
+    SetStatus(atoi(cmds[2].c_str()), 1);
+    cout << "Status changed.";
+}
+
+void SetStatusPosUndone(std::string* cmds)
+{
+    SetStatus(atoi(cmds[2].c_str()), 0);
+    cout << "Status changed.";
+}
+
+void SetStatusAllDone(std::string* cmds, int m_amnt)
+{
+    for(int i = 0; i < m_amnt + 1; i++)
+        SetStatus(i, 1);
+    cout << "Status changed.";
+}
+
+void SetStatusAllUndone(std::string* cmds, int m_amnt)
+{
+    for(int i = 0; i < m_amnt + 1; i++)
+        SetStatus(i, 0);
+    cout << "Status changed.";
+}
+
+void SetPriority(std::string* cmds)
+{
+    ChangePriority(atoi(cmds[2].c_str()), atoi(cmds[3].c_str()));
+    cout << "Priority changed.";
+}
+
+void DeleteAllF()
+{
+    if(Answer()){
+        DeleteAll();
+        cout << "Everything deleted.";
+    }else
+        cout << "Delete aborted.";
+}
+
+void DeleteStatusDone(int m_amnt)
+{
+    int i = 0;
+
+    if(Answer()){
+        while(i <= m_amnt){
+            if(MsgStatus(GetLine(i))){
+                DeleteData(i);
+                m_amnt = MessagesAmount();
+                i = 0;
+                continue;
+            }
+            i++;
+        }
+        cout << "Messages deleted.";
+    }else
+        cout << "Delete aborted.";
+}
+
+void DeleteStatusUndone(int m_amnt)
+{
+    int i = 0;
+
+    if(Answer()){
+        while(i <= m_amnt){
+            if(!MsgStatus(GetLine(i))){
+                DeleteData(i);
+                m_amnt = MessagesAmount();
+                i = 0;
+                continue;
+            }
+            i++;
+        }
+        cout << "Messages deleted.";
+    }else
+        cout << "Delete aborted.";
+}
+
+
+
+
+
 
