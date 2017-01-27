@@ -82,16 +82,23 @@ void Set(std::string* cmds, int m_amnt)
         }else if(cmds[2] == "all"){             //1.2. function
 
             if(cmds[3] == "done"){                  //1.2.1. function
-
                 if(cmds[4].empty()){
-                    //FIXME
+                    if(DigitEnter(0, m_amnt, cmds[2])){
+                        //FIXME
+
+                    }else
+                        cout << "No such message.";
+
                 }else
                     cout << "Unknown command < " << cmds[4] << " > .";
                                                     //==========
             }else if(cmds[3] == "undone"){          //1.2.2. function
-
                 if(cmds[4].empty()){
-                    //FIXME
+                    if(DigitEnter(0, m_amnt, cmds[2])){
+                        //FIXME
+                    }else
+                        cout << "No such message.";
+
                 }else
                     cout << "Unknown command < " << cmds[4] << " > .";
                                                     //==========
@@ -127,4 +134,16 @@ void Set(std::string* cmds, int m_amnt)
         cout << "Unknown command < " << cmds[1] << " > .";
 }
 
+
+void SetStatus(int pos, int status)
+{
+    string tmp;
+    string* words;
+    string::iterator inter = tmp.begin();
+
+    words = StrToWord(GetLine(pos));
+    int value = atoi(words[1].c_str());
+
+    if(value != status)     ChangeStatus(pos);
+}
 

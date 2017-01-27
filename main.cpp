@@ -34,6 +34,7 @@ int main()
     //bool c = IsDigit("45.1");
     //cout << GetLine(3);
 
+    //SetStatus(2, 0);
     //Organizer();
 }
 

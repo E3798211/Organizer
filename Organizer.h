@@ -11,4 +11,6 @@ void Delete(std::string* cmds, int m_amnt);
 void Change(std::string* cmds, int m_amnt);
 void Close(std::string* cmds, int m_amnt);
 
+void SetStatus(int pos, int status);
+
 #endif // ORGANIZER_H_INCLUDED
