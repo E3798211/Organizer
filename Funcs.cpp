@@ -257,3 +257,29 @@ bool IsDigit(std::string input)
     return false;
 }
 
+std::string GetLine(int pos)
+{
+    std::ifstream idata("data.txt");
+    std::ofstream otmp("tmp.txt");          //creating tmp.txt
+    std::string line_to_change;
+    std::string tmp_str;
+    int line_amount = 0;
+
+    while(!idata.eof()){                    //finding the line to change
+        std::getline(idata, tmp_str);       //and rewriting everything to tmp.txt
+        if(tmp_str.empty()) break;
+
+        otmp << tmp_str << "\n";
+
+        if(line_amount == pos)              //remembering the line_to_change
+            line_to_change = tmp_str;
+        line_amount++;
+    }
+
+    otmp.close();
+    std::remove("tmp.txt");
+
+    return line_to_change;
+}
+
+

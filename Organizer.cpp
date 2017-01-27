@@ -77,7 +77,29 @@ void Set(std::string* cmds, int m_amnt)
 
     if(cmds[1] == "status"){                    //1-st function
 
-        //FIXME
+        if(IsDigit(cmds[2])){
+            //FIXME
+        }else if(cmds[2] == "all"){             //1.2. function
+
+            if(cmds[3] == "done"){                  //1.2.1. function
+
+                if(cmds[4].empty()){
+                    //FIXME
+                }else
+                    cout << "Unknown command < " << cmds[4] << " > .";
+                                                    //==========
+            }else if(cmds[3] == "undone"){          //1.2.2. function
+
+                if(cmds[4].empty()){
+                    //FIXME
+                }else
+                    cout << "Unknown command < " << cmds[4] << " > .";
+                                                    //==========
+            }else
+                cout << "Unknown command < " << cmds[3] << " > .";
+
+        }else
+            cout << "Unknown command < " << cmds[2] << " > .";
 
     }else if(cmds[1] == "priority"){            //2-nd function
 
@@ -100,7 +122,7 @@ void Set(std::string* cmds, int m_amnt)
                 cout << "Incorrect enter. Priority expected after position.";
         }else
             cout << "Incorrect enter. Position expected after < priority > .";
-
+                                                //==========
     }else
         cout << "Unknown command < " << cmds[1] << " > .";
 }

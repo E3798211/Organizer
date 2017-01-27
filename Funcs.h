@@ -25,5 +25,6 @@ std::string* StrToWord(std::string str);    //String to 'words'. Max amount of '
 bool DigitEnter(int _min, int _max, std::string input);         //Protected enter
 int MessagesAmount();                       //Returns amount of lines in data.txt
 bool IsDigit(std::string input);            //Returns if input is digit
+std::string GetLine(int pos);               //Returns line          pos is already checked
 
 #endif // FUNCS_H_INCLUDED
