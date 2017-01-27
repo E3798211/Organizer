@@ -17,7 +17,6 @@ void Organizer()
             //cout << 2;
         }else if(commands[0] == "set"){
             Set(commands, message_amount);
-            //cout << 3;
         }else if(commands[0] == "delete"){
             //cout << 4;
         }else if(commands[0] == "change"){
@@ -40,20 +39,20 @@ void Add(std::string* cmds, int m_amnt)
 {
     string msg;
 
-    if(cmds[1][0] == '\"' && cmds[1][cmds[1].length() - 1] == '\"'){
-        if(cmds[2].empty()){                        //1-st function
-
+    if(cmds[1][0] == '\"' && cmds[1][cmds[1].length() - 1] == '\"'){    //1-st function
+//================================================================================
+        if(cmds[2].empty()){
             if(cmds[1] != "\""){
-                //if everything is OK
                 msg = cmds[1].substr(1, string::npos);      //creating msg correct
                 msg.erase(msg.length() - 1, string::npos);
                 AddData(msg);
                 cout << "New message created.";
-                //else
-            }else   cout << "Invalid message.";     //==========
 
+            }else
+                cout << "Invalid message.";
+//================================================================================
         }else if(IsDigit(cmds[2])){                 //2-nd function
-
+//================================================================================
             if(cmds[3].empty()){
                 if(DigitEnter(0, 9, cmds[2])){
                     msg = cmds[1].substr(1, string::npos);  //creating msg correct
@@ -64,7 +63,7 @@ void Add(std::string* cmds, int m_amnt)
                     cout << "Priority is out of range.";
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
-                                                    //==========
+//================================================================================
         }else
             cout << "Incorrect enter. Empty message or invalid priority enter.";
     }else
@@ -76,12 +75,35 @@ void Set(std::string* cmds, int m_amnt)
     int pos;
     int pri;
 
-    if(cmds[1] == "status"){                    //1-st function
+    if(cmds[1] == "status"){                                //1-st function
+        if(IsDigit(cmds[2])){                               //1.1.1 function
+//================================================================================
+            if(cmds[3] == "done"){
+                if(DigitEnter(0, m_amnt, cmds[2])){
+                    if(cmds[4].empty()){
+                        pos = atoi(cmds[2].c_str());
+                        SetStatus(pos, 1);
+                        cout << "Status changed.";
+                    }else
+                        cout << "Unknown command < " << cmds[4] << " > .";
+                }else
+                    cout << "No such message.";
+//================================================================================
+            }else if(cmds[3] == "undone"){                  //1.2.2 function
+                if(DigitEnter(0, m_amnt, cmds[2])){
+                    if(cmds[4].empty()){
+                        pos = atoi(cmds[2].c_str());
+                        SetStatus(pos, 0);
+                        cout << "Status changed.";
+                    }else
+                        cout << "Unknown command < " << cmds[4] << " > .";
+                }else
+                    cout << "No such message.";
+            }else
+                cout << "Unknown command < " << cmds[3] << " > .";
 
-        if(IsDigit(cmds[2])){
-            //FIXME
         }else if(cmds[2] == "all"){             //1.2. function
-
+//================================================================================
             if(cmds[3] == "done"){                  //1.2.1. function
                 if(cmds[4].empty()){
                     for(int i = 0; i < m_amnt + 1; i++)
@@ -89,7 +111,7 @@ void Set(std::string* cmds, int m_amnt)
                     cout << "Status changed.";
                 }else
                     cout << "Unknown command < " << cmds[4] << " > .";
-                                                    //==========
+//================================================================================
             }else if(cmds[3] == "undone"){          //1.2.2. function
                 if(cmds[4].empty()){
                     for(int i = 0; i < m_amnt + 1; i++)
@@ -97,13 +119,13 @@ void Set(std::string* cmds, int m_amnt)
                     cout << "Status changed.";
                 }else
                     cout << "Unknown command < " << cmds[4] << " > .";
-                                                    //==========
+//================================================================================
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
 
         }else
             cout << "Unknown command < " << cmds[2] << " > .";
-
+//================================================================================
     }else if(cmds[1] == "priority"){            //2-nd function
 
         if(IsDigit(cmds[2])){
@@ -129,6 +151,7 @@ void Set(std::string* cmds, int m_amnt)
     }else
         cout << "Unknown command < " << cmds[1] << " > .";
 }
+
 
 
 void SetStatus(int pos, int status)
