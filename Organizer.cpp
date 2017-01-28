@@ -21,10 +21,10 @@ void Organizer()
             Delete(commands, message_amount);
         }else if(commands[0] == "change"){
             //cout << 5;
-        }else if(commands[0] == "close"){
-            //cout << 6";
-            //Ask "are you sure?", than get ans. If positive, exit(0)
-            //exit(0);
+        }else if(commands[0] == "help"){
+            //FIXME
+        }else if(commands[0] == "quit"){
+            Quit(commands);
         }else{
             cout << "Unknown command < " << commands[0] << " >";
         }
@@ -228,6 +228,17 @@ void Delete(std::string* cmds, int m_amnt)
     }else{
         cout << "Unknown command < " << cmds[1] << " > .";
     }
+}
+
+void Quit(std::string* cmds)
+{
+    if(cmds[1].empty()){
+        if(Answer()){
+            exit(0);
+            cout << "Bye!";
+        }
+    }else
+        cout << "Unknown command < " << cmds[1] << " > .";
 }
 
 void SetStatus(int pos, int status)

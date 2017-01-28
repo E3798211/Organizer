@@ -9,7 +9,7 @@ void Show(std::string* cmds, int m_amnt);
 void Set(std::string* cmds, int m_amnt);
 void Delete(std::string* cmds, int m_amnt);
 void Change(std::string* cmds, int m_amnt);
-void Close(std::string* cmds, int m_amnt);
+void Quit(std::string* cmds);
 
 void SetStatus(int pos, int status);
 bool Answer();
