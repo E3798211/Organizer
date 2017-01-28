@@ -39,6 +39,11 @@ void ShowStatusUndone(int m_amnt);
 void ShowPriorityHigh(int m_amnt);
 void ShowPriorityLow(int m_amnt);
 void ShowPriorityMedium(int m_amnt);
+void ShowPriorityHigher(std::string* cmds, int m_amnt);
+void ShowPriorityLower(std::string* cmds, int m_amnt);
+void ShowPriorityBetween(std::string* cmds, int m_amnt);
+void ShowPriorityIncrease(int m_amnt);
+void ShowPriorityDecrease(int m_amnt);
 
 
 #endif // ORGANIZER_H_INCLUDED

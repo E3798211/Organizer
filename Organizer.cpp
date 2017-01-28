@@ -68,7 +68,7 @@ void Show(std::string* cmds, int m_amnt)
 {
     if(cmds[1] == "all"){
         if(cmds[2].empty()){
-            ShowAll(m_amnt);
+            ShowAll(m_amnt);                                        //+++++
         }else
             cout << "Unknown command < " << cmds[2] << " > .";
 //================================================================================
@@ -76,7 +76,7 @@ void Show(std::string* cmds, int m_amnt)
     }else if(cmds[1] == "status"){
         if(cmds[2] == "done"){
             if(cmds[3].empty()){
-                ShowStatusDone(m_amnt);
+                ShowStatusDone(m_amnt);                             //+++++
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
 //================================================================================
@@ -92,36 +92,75 @@ void Show(std::string* cmds, int m_amnt)
     }else if(cmds[1] == "priority"){
         if(cmds[2] == "high"){
             if(cmds[3].empty()){
-                ShowPriorityHigh(m_amnt);
+                ShowPriorityHigh(m_amnt);                           //+++++
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
 //================================================================================
         }else if(cmds[2] == "medium"){
             if(cmds[3].empty()){
-                ShowPriorityMedium(m_amnt);
+                ShowPriorityMedium(m_amnt);                         //+++++
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
 //================================================================================
         }else if(cmds[2] == "low"){
             if(cmds[3].empty()){
-                ShowPriorityLow(m_amnt);
+                ShowPriorityLow(m_amnt);                            //+++++
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
 //================================================================================
         }else if(cmds[2] == "higher"){
-            //FIXME
+            if(IsDigit(cmds[3])){
+                if(DigitEnter(0, 9, cmds[3])){
+                    if(cmds[4].empty()){
+                        ShowPriorityHigher(cmds, m_amnt);           //+++++
+                    }else
+                        cout << "Unknown command < " << cmds[4] << " > .";
+                }else
+                    cout << "Priority is out of range.";
+            }else
+                cout << "Expected priority value after < higher > .";
 //================================================================================
         }else if(cmds[2] == "lower"){
-            //FIXME
+            if(IsDigit(cmds[3])){
+                if(DigitEnter(0, 9, cmds[3])){
+                    if(cmds[4].empty()){
+                        ShowPriorityLower(cmds, m_amnt);            //+++++
+                    }else
+                        cout << "Unknown command < " << cmds[4] << " > .";
+                }else
+                    cout << "Priority is out of range.";
+            }else
+                cout << "Expected priority value after < lower > .";
 //================================================================================
         }else if(cmds[2] == "between"){
-            //FIXME
+            if(IsDigit(cmds[3])){
+                if(IsDigit(cmds[4])){
+                    if(DigitEnter(0, 9, cmds[3])){
+                        if(DigitEnter(0, 9, cmds[4])){
+                            if(cmds[5].empty()){
+                                ShowPriorityBetween(cmds, m_amnt);  //+++++
+                            }else
+                                cout << "";
+                        }else
+                            cout << "Priority is out of range.";
+                    }else
+                        cout << "Priority is out of range.";
+                }else
+                    cout << "Expected second priority value.";
+            }else
+                cout << "Expected priority value after < higher > .";
 //================================================================================
         }else if(cmds[2] == "increase"){
-            //FIXME
+            if(cmds[3].empty()){
+                ShowPriorityIncrease(m_amnt);                   //+++++
+            }else
+                cout << "Unknown command < " << cmds[3] << " > .";
 //================================================================================
         }else if(cmds[2] == "decrease"){
-            //FIXME
+            if(cmds[3].empty()){
+                ShowPriorityDecrease(m_amnt);                   //+++++
+            }else
+                cout << "Unknown command < " << cmds[3] << " > .";
         }else
             cout << "Unknown command < " << cmds[2] << " > .";
     }else
@@ -707,6 +746,91 @@ void ShowPriorityMedium(int m_amnt)
     }
     if(m_counter == 0)  cout << "No such messages." << endl;
 }
+
+void ShowPriorityHigher(std::string* cmds, int m_amnt)
+{
+    cout << endl;
+    cout << endl;
+    int m_counter = 0;
+    for(int i = 0; i < m_amnt + 1; i++){
+        if(MsgPriority(GetLine(i)) >= atoi(cmds[3].c_str())){
+            MsgShow(GetLine(i), i);
+            m_counter++;
+        }
+    }
+    if(m_counter == 0)  cout << "No such messages." << endl;
+}
+
+void ShowPriorityLower(std::string* cmds, int m_amnt)
+{
+    cout << endl;
+    cout << endl;
+    int m_counter = 0;
+    for(int i = 0; i < m_amnt + 1; i++){
+        if(MsgPriority(GetLine(i)) <= atoi(cmds[3].c_str())){
+            MsgShow(GetLine(i), i);
+            m_counter++;
+        }
+    }
+    if(m_counter == 0)  cout << "No such messages." << endl;
+}
+
+void ShowPriorityBetween(std::string* cmds, int m_amnt)
+{
+    cout << endl;
+    cout << endl;
+    int m_counter = 0;
+
+    int _min = atoi(cmds[3].c_str());
+    int _max = atoi(cmds[4].c_str());
+
+    if(_min > _max){            //swap min and max if we need it
+        int tmp = _min;
+        _min = _max;
+        _max = tmp;
+    }
+
+    for(int i = 0; i < m_amnt + 1; i++){
+        if(MsgPriority(GetLine(i)) >= _min && MsgPriority(GetLine(i)) <= _max){
+            MsgShow(GetLine(i), i);
+            m_counter++;
+        }
+    }
+    if(m_counter == 0)  cout << "No such messages." << endl;
+}
+
+void ShowPriorityDecrease(int m_amnt)
+{
+    cout << endl;
+    cout << endl;
+    int m_counter = 0;
+    for(int k = 9; k >= 0; k--){
+        for(int i = 0; i < m_amnt + 1; i++){
+            if(MsgPriority(GetLine(i)) == k){
+                MsgShow(GetLine(i), i);
+                m_counter++;
+            }
+        }
+    }
+    if(m_counter == 0)  cout << "No such messages." << endl;
+}
+
+void ShowPriorityIncrease(int m_amnt)
+{
+    cout << endl;
+    cout << endl;
+    int m_counter = 0;
+    for(int k = 0; k <= 9; k++){
+        for(int i = 0; i < m_amnt + 1; i++){
+            if(MsgPriority(GetLine(i)) == k){
+                MsgShow(GetLine(i), i);
+                m_counter++;
+            }
+        }
+    }
+    if(m_counter == 0)  cout << "No such messages." << endl;
+}
+
 
 
 
