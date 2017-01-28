@@ -15,6 +15,7 @@ void SetStatus(int pos, int status);
 bool Answer();
 bool MsgStatus(std::string line);
 int MsgPriority(std::string line);
+void MsgShow(std::string line, int pos);
 
 void AddMsg(std::string* cmds);
 void AddMsgPri(std::string* cmds);

@@ -241,6 +241,8 @@ void Quit(std::string* cmds)
         cout << "Unknown command < " << cmds[1] << " > .";
 }
 
+
+
 void SetStatus(int pos, int status)
 {
     string tmp;
@@ -299,6 +301,43 @@ int MsgPriority(std::string line)
     int value = atoi(words[0].c_str());
     delete [] words;
     return value;
+}
+
+void MsgShow(std::string line, int pos)
+{
+    string* words = StrToWord(line);
+
+    cout << "\t" << pos << ":\t" << words[0] << "\t";
+
+    if(words[1] == "1")     cout << "DONE\t";
+    else                    cout << "UNDONE\t";
+
+    //breaking long string into pieces
+    int str_num = 0;
+    int str_pos = 0;
+
+    string* strs = new string [256];
+
+    while(str_pos <= words[2].length()){
+        strs[str_num] = words[2].substr(str_pos, 30);       //copying string in strs
+        str_pos += 30;                                        //changing position
+        str_num++;                                          //beginning new str
+    }
+
+    str_num = 0;                                        //printing strs
+    while(!strs[str_num].empty()){
+        /*
+        cout << "\t\t\t\t" << strs[str_num] << "\n";
+        str_num++;
+        */
+        if(str_num == 0)    cout << "\t";
+        else                cout << "\t\t\t\t\t";
+        cout << strs[str_num] << "\n";
+        str_num++;
+    }
+
+    delete [] strs;
+    delete [] words;
 }
 
 void AddMsg(std::string* cmds)
