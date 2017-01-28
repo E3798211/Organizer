@@ -7,6 +7,8 @@ void Organizer()
     std::string* commands;      //user's commands
     int message_amount;
 
+    Password();
+
     while(1){
         message_amount = MessagesAmount();
         commands = StrToWord(UserEnter());
@@ -20,7 +22,7 @@ void Organizer()
         }else if(commands[0] == "delete"){
             Delete(commands, message_amount);
         }else if(commands[0] == "change"){
-            //cout << 5;
+            Change(commands, message_amount);
         }else if(commands[0] == "help"){
             Help();
         }else if(commands[0] == "quit"){
@@ -59,9 +61,9 @@ void Add(std::string* cmds, int m_amnt)
                 cout << "Unknown command < " << cmds[3] << " > .";
 //================================================================================
         }else
-            cout << "Incorrect enter. Empty message or invalid priority enter.";
+            cout << "Empty message or incorrect priority value enter.";
     }else
-        cout << "Incorrect enter. Message expected after < add > .";
+        cout << "Message expected after < add > .";
 }
 
 void Show(std::string* cmds, int m_amnt)
@@ -328,9 +330,30 @@ void Delete(std::string* cmds, int m_amnt)
                 cout << "Invalid enter. Expected priority value.";
         }else
             cout << "Unknown command < " << cmds[2] << " > .";
+//================================================================================
+//================================================================================
+    }else if(IsDigit(cmds[1])){
+        if(cmds[2].empty()){
+            if(DigitEnter(0, m_amnt, cmds[1])){
+                DeletePos(cmds);
+            }else
+                cout << "No such message.";
+        }else
+            cout << "Unknown command < " << cmds[1] << " > .";
     }else{
         cout << "Unknown command < " << cmds[1] << " > .";
     }
+}
+
+void Change(std::string* cmds, int m_amnt)
+{
+    if(cmds[1] == "password"){
+        if(cmds[2].empty()){
+            ChangePassword();
+        }else
+            cout << "Unknown command < " << cmds[2] << " > .";
+    }else
+        cout << "Unknown command < " << cmds[1] << " > .";
 }
 
 void Help()
@@ -679,6 +702,15 @@ void DeletePriorityBetween(std::string* cmds, int m_amnt)
         cout << "Delete aborted.";
 }
 
+void DeletePos(std::string* cmds)
+{
+    if(Answer()){
+        DeleteData(atoi(cmds[1].c_str()));
+        cout << "Message deleted.";
+    }else
+        cout << "Delete aborted.";
+}
+
 void ShowAll(int m_amnt)
 {
     cout << endl;
@@ -847,5 +879,80 @@ void ShowPriorityIncrease(int m_amnt)
 
 
 
+void Password()
+{
+    while(1){
+        cout << "Enter password:\n";
+        if(PasswordCheck(UserEnter())){
+            cout << endl;
+            cout << "Correct.\n" << endl;
+            break;
+        }
+        cout << "Incorrect.\n\n";
+    }
+}
 
+void ChangePassword()
+{
+    string cur_pass;
+    string new_pass1;
+    string new_pass2;
+    string* tmp0;
+    string* tmp1;
+    string* tmp2;
+
+    while(1){
+        cout << "Enter current password:\n";
+        cur_pass = UserEnter();
+        tmp0 = StrToWord(cur_pass);
+//==============================================================================
+        if(tmp0[0] == "abort"){
+            cout << "Password change aborted.\n";
+            break;
+//==============================================================================
+        }else if(PasswordCheck(cur_pass)){
+            cout << "Enter new password:\n";
+            new_pass1 = UserEnter();
+            tmp1 = StrToWord(new_pass1);
+
+            if(tmp1[0] == "abort"){              //abort
+                cout << "Password change aborted.\n";
+                delete [] tmp0;
+                delete [] tmp1;
+                delete [] tmp2;
+                break;
+            }
+
+            cout << "Again:\n";
+            new_pass2 = UserEnter();
+            tmp2 = StrToWord(new_pass2);
+
+            if(tmp2[0] == "abort"){              //abort
+                cout << "Password change aborted.\n";
+                delete [] tmp0;
+                delete [] tmp1;
+                delete [] tmp2;
+                break;
+            }
+
+            if(new_pass1 == new_pass2){
+                ofstream memo("memo.txt", std::ios_base::trunc);
+                memo << new_pass2;
+                cout << "Password changed.\n";
+                delete [] tmp0;
+                delete [] tmp1;
+                delete [] tmp2;
+                break;
+            }
+//==============================================================================
+        }else{
+            cout << "Incorrect.\n";
+        }
+        cout << "Password was not changed.\n";
+        delete [] tmp0;
+        delete [] tmp1;
+        delete [] tmp2;
+    }
+
+}
 

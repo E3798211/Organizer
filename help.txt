@@ -1,4 +1,48 @@
-My help
-		try
-	new string
-later it would be better
+Commands:
+
+1. add------------------------------------------
+	1.1. "YourMessage"
+	1.2. "YourMessage" <priority>
+2. show-----------------------------------------
+	2.1. all
+	2.2. status
+		2.2.1. done
+		2.2.2. undone
+	2.3. priority
+		2.3.1. high
+		2.3.2. medium
+		2.3.3. low
+		2.3.4. lower	<priority>
+		2.3.5. higher	<priority>
+		2.3.6. between 	<priority_1> <priority_2>
+		2.3.7. decrease
+		2.3.8. increase
+
+3. set------------------------------------------
+	3.1. status
+		3.1.1. <position>
+			3.1.1.1. done
+			3.1.1.2. undone
+		3.1.2. all
+			3.1.2.1. done
+			3.1.2.2. undone
+	3.2. priority  <position> <priority>
+
+
+4. delete---------------------------------------
+	4.1. all
+	4.2. status
+		4.2.1. done
+		4.2.2. undone
+	4.3. priority
+		4.3.1. high		(7-9)
+		4.3.2. medium		(3-6)
+		4.3.3. low		(0-2)
+		4.3.4. lower 	<priority>
+		4.3.5. higher 	<priority>
+		4.3.6. between 	<priority_1> <priority_2>
+	4.4 <position>
+5. change---------------------------------------
+	5.1. password
+6. help-----------------------------------------
+7. quit-----------------------------------------

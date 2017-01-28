@@ -34,6 +34,7 @@ void DeletePriorityMedium(int m_amnt);
 void DeletePriorityHigher(std::string* cmds, int m_amnt);
 void DeletePriorityLower(std::string* cmds, int m_amnt);
 void DeletePriorityBetween(std::string* cmds, int m_amnt);
+void DeletePos(std::string* cmds);
 void ShowAll(int m_amnt);
 void ShowStatusDone(int m_amnt);
 void ShowStatusUndone(int m_amnt);
@@ -45,6 +46,9 @@ void ShowPriorityLower(std::string* cmds, int m_amnt);
 void ShowPriorityBetween(std::string* cmds, int m_amnt);
 void ShowPriorityIncrease(int m_amnt);
 void ShowPriorityDecrease(int m_amnt);
+
+void Password();
+void ChangePassword();
 
 
 #endif // ORGANIZER_H_INCLUDED

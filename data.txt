@@ -6,4 +6,3 @@
 5 0 aaa
 3 0 aaa
 7 0 aaa
-8 0 aaa
