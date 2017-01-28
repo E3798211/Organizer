@@ -1,5 +1,6 @@
 #include "Organizer.h"
 
+
 using namespace std;
 
 void Organizer()
@@ -445,12 +446,30 @@ int MsgPriority(std::string line)
 
 void MsgShow(std::string line, int pos)
 {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);  //console color
+
     string* words = StrToWord(line);
 
-    cout << "\t" << pos << ":\t" << words[0] << "\t";
+    cout << "\t" << pos << ":\t";// << words[0] << "\t";
 
-    if(words[1] == "1")     cout << "DONE\t";
-    else                    cout << "UNDONE\t";
+            //correcting color
+    if(atoi(words[0].c_str()) >= 7)
+        SetConsoleTextAttribute(hConsole, (WORD) ((0 << 4) | 12));
+    else if(atoi(words[0].c_str()) <= 2)
+        SetConsoleTextAttribute(hConsole, (WORD) ((0 << 4) | 10));
+    else
+        SetConsoleTextAttribute(hConsole, (WORD) ((0 << 4) | 14));
+
+    cout << words[0] << "\t";
+            //correcting color
+    if(words[1] == "1"){
+        SetConsoleTextAttribute(hConsole, (WORD) ((0 << 4) | 10));   //writing with green
+        cout << "DONE\t";
+    }else{
+        SetConsoleTextAttribute(hConsole, (WORD) ((0 << 4) | 12));   //writing with red
+        cout << "UNDONE\t";
+    }
+    SetConsoleTextAttribute(hConsole, (WORD) ((0 << 4) | 7));   //returning everything back
 
     //breaking long string into pieces
     int str_num = 0;

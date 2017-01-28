@@ -2,6 +2,8 @@
 #define ORGANIZER_H_INCLUDED
 
 #include "Funcs.h"
+#include <stdio.h>
+#include <windows.h>
 
 void Organizer();
 void Add(std::string* cmds, int m_amnt);
