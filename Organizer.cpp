@@ -915,17 +915,21 @@ void ChangePassword()
     string cur_pass;
     string new_pass1;
     string new_pass2;
-    string* tmp0;
-    string* tmp1;
-    string* tmp2;
 
     while(1){
+        string* tmp0;
+        string* tmp1;
+        string* tmp2;
+
         cout << "Enter current password:\n";
         cur_pass = UserEnter();
         tmp0 = StrToWord(cur_pass);
 //==============================================================================
         if(tmp0[0] == "abort"){
             cout << "Password change aborted.\n";
+            delete tmp0;
+            delete tmp1;
+            delete tmp2;
             break;
 //==============================================================================
         }else if(PasswordCheck(cur_pass)){
