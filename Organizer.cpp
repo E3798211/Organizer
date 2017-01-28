@@ -71,8 +71,24 @@ void Show(std::string* cmds, int m_amnt)
             ShowAll(cmds, m_amnt);
         }else
             cout << "Unknown command < " << cmds[2] << " > .";
+//================================================================================
+//================================================================================
     }else if(cmds[1] == "status"){
-        //FIXME
+        if(cmds[2] == "done"){
+            if(cmds[3].empty()){
+                ShowStatusDone(cmds, m_amnt);
+            }else
+                cout << "Unknown command < " << cmds[3] << " > .";
+//================================================================================
+        }else if(cmds[2] == "undone"){
+            if(cmds[3].empty()){
+                ShowStatusUndone(cmds, m_amnt);
+            }else
+                cout << "Unknown command < " << cmds[3] << " > .";
+        }else
+            cout << "Unknown command < " << cmds[2] << " > .";
+//================================================================================
+//================================================================================
     }else if(cmds[1] == "priority"){
         //FIXME
     }else
@@ -586,6 +602,22 @@ void ShowAll(std::string* cmds, int m_amnt)
     }
 }
 
+void ShowStatusDone(std::string* cmds, int m_amnt)
+{
+    cout << endl;
+    cout << endl;
+    for(int i = 0; i < m_amnt + 1; i++){
+        if(MsgStatus(GetLine(i)))
+            MsgShow(GetLine(i), i);
+    }
+}
 
-
-
+void ShowStatusUndone(std::string* cmds, int m_amnt)
+{
+    cout << endl;
+    cout << endl;
+    for(int i = 0; i < m_amnt + 1; i++){
+        if(!MsgStatus(GetLine(i)))
+            MsgShow(GetLine(i), i);
+    }
+}
