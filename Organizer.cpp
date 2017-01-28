@@ -22,7 +22,7 @@ void Organizer()
         }else if(commands[0] == "change"){
             //cout << 5;
         }else if(commands[0] == "help"){
-            //FIXME
+            Help();
         }else if(commands[0] == "quit"){
             Quit(commands);
         }else{
@@ -330,6 +330,20 @@ void Delete(std::string* cmds, int m_amnt)
             cout << "Unknown command < " << cmds[2] << " > .";
     }else{
         cout << "Unknown command < " << cmds[1] << " > .";
+    }
+}
+
+void Help()
+{
+    ifstream help("help.txt");
+    string tmp;
+
+    cout << endl;
+    cout << endl;
+
+    while(!help.eof()){
+        getline(help, tmp);
+        cout << tmp << endl;
     }
 }
 
