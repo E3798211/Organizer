@@ -475,20 +475,19 @@ void MsgShow(std::string line, int pos)
     int str_num = 0;
     int str_pos = 0;
 
+    string tmp = line;                                          //writing message in tmp
+    tmp.erase(0, 4);
+
     string* strs = new string [256];
 
-    while(str_pos <= words[2].length()){
-        strs[str_num] = words[2].substr(str_pos, 30);       //copying string in strs
-        str_pos += 30;                                        //changing position
-        str_num++;                                          //beginning new str
+    while(str_pos <= tmp.length()){
+        strs[str_num] = tmp.substr(str_pos, 30);                //copying string in strs
+        str_pos += 30;                                          //changing position
+        str_num++;                                              //beginning new str
     }
 
     str_num = 0;                                        //printing strs
     while(!strs[str_num].empty()){
-        /*
-        cout << "\t\t\t\t" << strs[str_num] << "\n";
-        str_num++;
-        */
         if(str_num == 0)    cout << "\t";
         else                cout << "\t\t\t\t\t";
         cout << strs[str_num] << "\n";
@@ -739,7 +738,7 @@ void ShowAll(int m_amnt)
         MsgShow(GetLine(i), i);
         m_counter++;
     }
-    if(m_counter == 0)  cout << "Repository is empty." << endl;
+    if(m_counter == 0)  cout << "\t\tRepository is empty." << endl;
 }
 
 void ShowStatusDone(int m_amnt)
@@ -753,7 +752,7 @@ void ShowStatusDone(int m_amnt)
             m_counter++;
         }
     }
-    if(m_counter == 0)  cout << "No such messages." << endl;
+    if(m_counter == 0)  cout << "\t\tNo such messages." << endl;
 }
 
 void ShowStatusUndone(int m_amnt)
@@ -767,7 +766,7 @@ void ShowStatusUndone(int m_amnt)
             m_counter++;
         }
     }
-    if(m_counter == 0)  cout << "No such messages." << endl;
+    if(m_counter == 0)  cout << "\t\tNo such messages." << endl;
 }
 
 void ShowPriorityHigh(int m_amnt)
@@ -781,7 +780,7 @@ void ShowPriorityHigh(int m_amnt)
             m_counter++;
         }
     }
-    if(m_counter == 0)  cout << "No such messages." << endl;
+    if(m_counter == 0)  cout << "\t\tNo such messages." << endl;
 }
 
 void ShowPriorityLow(int m_amnt)
@@ -795,7 +794,7 @@ void ShowPriorityLow(int m_amnt)
             m_counter++;
         }
     }
-    if(m_counter == 0)  cout << "No such messages." << endl;
+    if(m_counter == 0)  cout << "\t\tNo such messages." << endl;
 }
 
 void ShowPriorityMedium(int m_amnt)
@@ -809,7 +808,7 @@ void ShowPriorityMedium(int m_amnt)
             m_counter++;
         }
     }
-    if(m_counter == 0)  cout << "No such messages." << endl;
+    if(m_counter == 0)  cout << "\t\tNo such messages." << endl;
 }
 
 void ShowPriorityHigher(std::string* cmds, int m_amnt)
@@ -823,7 +822,7 @@ void ShowPriorityHigher(std::string* cmds, int m_amnt)
             m_counter++;
         }
     }
-    if(m_counter == 0)  cout << "No such messages." << endl;
+    if(m_counter == 0)  cout << "\t\tNo such messages." << endl;
 }
 
 void ShowPriorityLower(std::string* cmds, int m_amnt)
@@ -837,7 +836,7 @@ void ShowPriorityLower(std::string* cmds, int m_amnt)
             m_counter++;
         }
     }
-    if(m_counter == 0)  cout << "No such messages." << endl;
+    if(m_counter == 0)  cout << "\t\tNo such messages." << endl;
 }
 
 void ShowPriorityBetween(std::string* cmds, int m_amnt)
@@ -861,7 +860,7 @@ void ShowPriorityBetween(std::string* cmds, int m_amnt)
             m_counter++;
         }
     }
-    if(m_counter == 0)  cout << "No such messages." << endl;
+    if(m_counter == 0)  cout << "\t\tNo such messages." << endl;
 }
 
 void ShowPriorityDecrease(int m_amnt)
@@ -877,7 +876,7 @@ void ShowPriorityDecrease(int m_amnt)
             }
         }
     }
-    if(m_counter == 0)  cout << "No such messages." << endl;
+    if(m_counter == 0)  cout << "\t\tNo such messages." << endl;
 }
 
 void ShowPriorityIncrease(int m_amnt)
@@ -893,7 +892,7 @@ void ShowPriorityIncrease(int m_amnt)
             }
         }
     }
-    if(m_counter == 0)  cout << "No such messages." << endl;
+    if(m_counter == 0)  cout << "\t\tNo such messages." << endl;
 }
 
 
