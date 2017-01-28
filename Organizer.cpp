@@ -14,7 +14,7 @@ void Organizer()
         if(commands[0] == "add"){
             Add(commands, message_amount);
         }else if(commands[0] == "show"){
-            //cout << 2;
+            Show(commands, message_amount);
         }else if(commands[0] == "set"){
             Set(commands, message_amount);
         }else if(commands[0] == "delete"){
@@ -62,6 +62,21 @@ void Add(std::string* cmds, int m_amnt)
             cout << "Incorrect enter. Empty message or invalid priority enter.";
     }else
         cout << "Incorrect enter. Message expected after < add > .";
+}
+
+void Show(std::string* cmds, int m_amnt)
+{
+    if(cmds[1] == "all"){
+        if(cmds[2].empty()){
+            ShowAll(cmds, m_amnt);
+        }else
+            cout << "Unknown command < " << cmds[2] << " > .";
+    }else if(cmds[1] == "status"){
+        //FIXME
+    }else if(cmds[1] == "priority"){
+        //FIXME
+    }else
+        cout << "Unknown command < " << cmds[1] << " > .";
 }
 
 void Set(std::string* cmds, int m_amnt)
@@ -561,6 +576,16 @@ void DeletePriorityBetween(std::string* cmds, int m_amnt)
     }else
         cout << "Delete aborted.";
 }
+
+void ShowAll(std::string* cmds, int m_amnt)
+{
+    cout << endl;
+    cout << endl;
+    for(int i = 0; i < m_amnt + 1; i++){
+        MsgShow(GetLine(i), i);
+    }
+}
+
 
 
 
