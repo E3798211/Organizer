@@ -1,8 +1,7 @@
-0 0 aaa
-0 0 aaa
-0 0 aaa
-0 0 aaa
-0 0 aaa
-9 1 Very importand something with really long size and without any meaning. I need it to show how does it prints.
+9 0 Very importand something with really long size and without any meaning. I need it to show how does it prints.
 0 0 Here is another long message to show how nice it is.
 5 0 sth
+8 0 Message
+3 0 1111
+7 0 222
+6 0 ufhgiuhg

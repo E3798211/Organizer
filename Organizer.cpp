@@ -172,9 +172,6 @@ void Show(std::string* cmds, int m_amnt)
 
 void Set(std::string* cmds, int m_amnt)
 {
-    int pos;
-    int pri;
-
     if(cmds[1] == "status"){                                //1-st function
         if(IsDigit(cmds[2])){                               //1.1.1 function
 //================================================================================
@@ -244,8 +241,6 @@ void Set(std::string* cmds, int m_amnt)
 
 void Delete(std::string* cmds, int m_amnt)
 {
-    int pos;
-    int pri;
     string tmp;
 
     if(cmds[1] == "all"){                           //1-st function
@@ -977,4 +972,6 @@ void ChangePassword()
     }
 
 }
+
+
 
