@@ -68,7 +68,7 @@ void Show(std::string* cmds, int m_amnt)
 {
     if(cmds[1] == "all"){
         if(cmds[2].empty()){
-            ShowAll(cmds, m_amnt);
+            ShowAll(m_amnt);
         }else
             cout << "Unknown command < " << cmds[2] << " > .";
 //================================================================================
@@ -76,13 +76,13 @@ void Show(std::string* cmds, int m_amnt)
     }else if(cmds[1] == "status"){
         if(cmds[2] == "done"){
             if(cmds[3].empty()){
-                ShowStatusDone(cmds, m_amnt);
+                ShowStatusDone(m_amnt);
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
 //================================================================================
         }else if(cmds[2] == "undone"){
             if(cmds[3].empty()){
-                ShowStatusUndone(cmds, m_amnt);
+                ShowStatusUndone(m_amnt);
             }else
                 cout << "Unknown command < " << cmds[3] << " > .";
         }else
@@ -90,7 +90,40 @@ void Show(std::string* cmds, int m_amnt)
 //================================================================================
 //================================================================================
     }else if(cmds[1] == "priority"){
-        //FIXME
+        if(cmds[2] == "high"){
+            if(cmds[3].empty()){
+                ShowPriorityHigh(m_amnt);
+            }else
+                cout << "Unknown command < " << cmds[3] << " > .";
+//================================================================================
+        }else if(cmds[2] == "medium"){
+            if(cmds[3].empty()){
+                ShowPriorityMedium(m_amnt);
+            }else
+                cout << "Unknown command < " << cmds[3] << " > .";
+//================================================================================
+        }else if(cmds[2] == "low"){
+            if(cmds[3].empty()){
+                ShowPriorityLow(m_amnt);
+            }else
+                cout << "Unknown command < " << cmds[3] << " > .";
+//================================================================================
+        }else if(cmds[2] == "higher"){
+            //FIXME
+//================================================================================
+        }else if(cmds[2] == "lower"){
+            //FIXME
+//================================================================================
+        }else if(cmds[2] == "between"){
+            //FIXME
+//================================================================================
+        }else if(cmds[2] == "increase"){
+            //FIXME
+//================================================================================
+        }else if(cmds[2] == "decrease"){
+            //FIXME
+        }else
+            cout << "Unknown command < " << cmds[2] << " > .";
     }else
         cout << "Unknown command < " << cmds[1] << " > .";
 }
@@ -593,31 +626,88 @@ void DeletePriorityBetween(std::string* cmds, int m_amnt)
         cout << "Delete aborted.";
 }
 
-void ShowAll(std::string* cmds, int m_amnt)
+void ShowAll(int m_amnt)
 {
     cout << endl;
     cout << endl;
+    int m_counter = 0;
     for(int i = 0; i < m_amnt + 1; i++){
         MsgShow(GetLine(i), i);
+        m_counter++;
     }
+    if(m_counter == 0)  cout << "Repository is empty." << endl;
 }
 
-void ShowStatusDone(std::string* cmds, int m_amnt)
+void ShowStatusDone(int m_amnt)
 {
     cout << endl;
     cout << endl;
+    int m_counter = 0;
     for(int i = 0; i < m_amnt + 1; i++){
-        if(MsgStatus(GetLine(i)))
+        if(MsgStatus(GetLine(i))){
             MsgShow(GetLine(i), i);
+            m_counter++;
+        }
     }
+    if(m_counter == 0)  cout << "No such messages." << endl;
 }
 
-void ShowStatusUndone(std::string* cmds, int m_amnt)
+void ShowStatusUndone(int m_amnt)
 {
     cout << endl;
     cout << endl;
+    int m_counter = 0;
     for(int i = 0; i < m_amnt + 1; i++){
-        if(!MsgStatus(GetLine(i)))
+        if(!MsgStatus(GetLine(i))){
             MsgShow(GetLine(i), i);
+            m_counter++;
+        }
     }
+    if(m_counter == 0)  cout << "No such messages." << endl;
 }
+
+void ShowPriorityHigh(int m_amnt)
+{
+    cout << endl;
+    cout << endl;
+    int m_counter = 0;
+    for(int i = 0; i < m_amnt + 1; i++){
+        if(MsgPriority(GetLine(i)) >= 7){
+            MsgShow(GetLine(i), i);
+            m_counter++;
+        }
+    }
+    if(m_counter == 0)  cout << "No such messages." << endl;
+}
+
+void ShowPriorityLow(int m_amnt)
+{
+    cout << endl;
+    cout << endl;
+    int m_counter = 0;
+    for(int i = 0; i < m_amnt + 1; i++){
+        if(MsgPriority(GetLine(i)) <= 2){
+            MsgShow(GetLine(i), i);
+            m_counter++;
+        }
+    }
+    if(m_counter == 0)  cout << "No such messages." << endl;
+}
+
+void ShowPriorityMedium(int m_amnt)
+{
+    cout << endl;
+    cout << endl;
+    int m_counter = 0;
+    for(int i = 0; i < m_amnt + 1; i++){
+        if(MsgPriority(GetLine(i)) >= 3 && MsgPriority(GetLine(i)) <= 6){
+            MsgShow(GetLine(i), i);
+            m_counter++;
+        }
+    }
+    if(m_counter == 0)  cout << "No such messages." << endl;
+}
+
+
+
+

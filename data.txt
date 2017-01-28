@@ -1,9 +1,9 @@
 0 0 aaa
 1 0 aaa
-2 1 aaa
+2 0 aaa
 3 0 aaa
 4 0 aaa
-5 1 aaa
+5 0 aaa
 6 0 aaa
 7 0 aaa
 8 0 aaa
