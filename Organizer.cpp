@@ -5,6 +5,8 @@ using namespace std;
 
 void Organizer()
 {
+    setlocale(LC_ALL, "ru");    //Russian language added
+
     std::string* commands;      //user's commands
     int message_amount;
 
